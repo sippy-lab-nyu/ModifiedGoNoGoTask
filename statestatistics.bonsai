@@ -9,8 +9,6 @@
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
-                 xmlns:p4="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
-                 xmlns:p5="clr-namespace:Bonsai.Harp.CF;assembly=Bonsai.Harp.CF"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -135,7 +133,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Delay">
-                <rx:DueTime>PT3S</rx:DueTime>
+                <rx:DueTime>PT4S</rx:DueTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -608,9 +606,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>5</p1:Trial>
-          <p1:Id>Go</p1:Id>
-          <p1:ElapsedTime>36194.580735999996</p1:ElapsedTime>
+          <p1:Trial>0</p1:Trial>
+          <p1:Id>ITI</p1:Id>
+          <p1:ElapsedTime>42411.1826944</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -624,9 +622,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>5</p1:Trial>
+          <p1:Trial>0</p1:Trial>
           <p1:Id>Joystick</p1:Id>
-          <p1:ElapsedTime>36188.570112</p1:ElapsedTime>
+          <p1:ElapsedTime>42409.4055552</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -650,9 +648,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>5</p1:Trial>
+          <p1:Trial>0</p1:Trial>
           <p1:Id>Lick</p1:Id>
-          <p1:ElapsedTime>33764.8471552</p1:ElapsedTime>
+          <p1:ElapsedTime>42380.702207999995</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -660,112 +658,6 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateStatistics" />
-      </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>Joystick</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>Commands</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p4:Device">
-                <p4:PortName>COM4</p4:PortName>
-                <p4:DeviceState>Active</p4:DeviceState>
-                <p4:DumpRegisters>true</p4:DumpRegisters>
-                <p4:LedState>On</p4:LedState>
-                <p4:VisualIndicators>On</p4:VisualIndicators>
-                <p4:Heartbeat>Disable</p4:Heartbeat>
-                <p4:IgnoreErrors>false</p4:IgnoreErrors>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="p5:BehaviorEvent">
-              <p5:Type>QuadratureCounter</p5:Type>
-              <p5:Mask>Port2</p5:Mask>
-            </Expression>
-            <Expression xsi:type="PublishSubject">
-              <Name>Joystick</Name>
-            </Expression>
-            <Expression xsi:type="p5:BehaviorEvent">
-              <p5:Type>AnalogInput</p5:Type>
-              <p5:Mask>Port1</p5:Mask>
-            </Expression>
-            <Expression xsi:type="PublishSubject">
-              <Name>Touch</Name>
-            </Expression>
-            <Expression xsi:type="p5:BehaviorEvent">
-              <p5:Type>Input</p5:Type>
-              <p5:Mask>Poke1InfraRedBeam</p5:Mask>
-            </Expression>
-            <Expression xsi:type="PublishSubject">
-              <Name>Reward</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p4:CreateHarpMessage">
-                <p4:MessageType>Write</p4:MessageType>
-                <p4:Address>32</p4:Address>
-                <p4:PayloadType>U8</p4:PayloadType>
-                <p4:Payload>0</p4:Payload>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:IgnoreElements" />
-            </Expression>
-            <Expression xsi:type="BehaviorSubject">
-              <Name>Commands</Name>
-            </Expression>
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="1" To="4" Label="Source1" />
-            <Edge From="1" To="6" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-            <Edge From="4" To="5" Label="Source1" />
-            <Edge From="6" To="7" Label="Source1" />
-            <Edge From="8" To="9" Label="Source1" />
-            <Edge From="9" To="10" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>Touch</Name>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p2:Abs" />
-      </Expression>
-      <Expression xsi:type="GreaterThan">
-        <Operand xsi:type="DoubleProperty">
-          <Value>0.015</Value>
-        </Operand>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:DistinctUntilChanged" />
-      </Expression>
-      <Expression xsi:type="Condition">
-        <Name>TouchDetect</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="WorkflowInput">
-              <Name>Source1</Name>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="BooleanProperty">
-          <Value>true</Value>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Timestamp" />
-      </Expression>
-      <Expression xsi:type="PublishSubject">
-        <Name>Lick</Name>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p2:CreateRandom">
@@ -781,46 +673,6 @@
       <Expression xsi:type="AsyncSubject">
         <Name>TrialDistribution</Name>
       </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>SoundCard</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>Sounds</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p4:Device">
-                <p4:PortName>COM3</p4:PortName>
-                <p4:DeviceState>Active</p4:DeviceState>
-                <p4:DumpRegisters>true</p4:DumpRegisters>
-                <p4:LedState>On</p4:LedState>
-                <p4:VisualIndicators>On</p4:VisualIndicators>
-                <p4:Heartbeat>Disable</p4:Heartbeat>
-                <p4:IgnoreErrors>false</p4:IgnoreErrors>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p4:CreateHarpMessage">
-                <p4:MessageType>Write</p4:MessageType>
-                <p4:Address>32</p4:Address>
-                <p4:PayloadType>U8</p4:PayloadType>
-                <p4:Payload>0</p4:Payload>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:IgnoreElements" />
-            </Expression>
-            <Expression xsi:type="BehaviorSubject">
-              <Name>Sounds</Name>
-            </Expression>
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-            <Edge From="3" To="4" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
       <Expression xsi:type="PropertySource" TypeArguments="p1:TrialResponse,p1:ResponseId">
         <MemberName>Result</MemberName>
         <Value>Hit</Value>
@@ -828,6 +680,8 @@
       <Expression xsi:type="BehaviorSubject">
         <Name>PreviousResponse</Name>
       </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\SoftSoundCard.bonsai" />
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\SoftJoystick.bonsai" />
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -867,16 +721,9 @@
       <Edge From="37" To="38" Label="Source1" />
       <Edge From="38" To="39" Label="Source3" />
       <Edge From="39" To="40" Label="Source1" />
+      <Edge From="41" To="42" Label="Source1" />
       <Edge From="42" To="43" Label="Source1" />
-      <Edge From="43" To="44" Label="Source1" />
       <Edge From="44" To="45" Label="Source1" />
-      <Edge From="45" To="46" Label="Source1" />
-      <Edge From="46" To="47" Label="Source1" />
-      <Edge From="47" To="48" Label="Source1" />
-      <Edge From="48" To="49" Label="Source1" />
-      <Edge From="50" To="51" Label="Source1" />
-      <Edge From="51" To="52" Label="Source1" />
-      <Edge From="54" To="55" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>

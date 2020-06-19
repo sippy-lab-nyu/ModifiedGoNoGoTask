@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.5.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
+                 xmlns:p1="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:MouseMove" />
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>X</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:Rescale">
+          <dsp:Min>0</dsp:Min>
+          <dsp:Max>500</dsp:Max>
+          <dsp:RangeMin>-5</dsp:RangeMin>
+          <dsp:RangeMax>5</dsp:RangeMax>
+          <dsp:RescaleType>Linear</dsp:RescaleType>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="PublishSubject">
+        <Name>Joystick</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:KeyDown">
+          <wie:Filter>L</wie:Filter>
+          <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="PublishSubject">
+        <Name>Lick</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:KeyDown">
+          <wie:Filter>None</wie:Filter>
+          <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Equal">
+        <Operand xsi:type="WorkflowProperty" TypeArguments="p1:Keys">
+          <Value>R</Value>
+        </Operand>
+      </Expression>
+      <Expression xsi:type="PublishSubject">
+        <Name>Reward</Name>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="1" Label="Source1" />
+      <Edge From="1" To="2" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="4" To="5" Label="Source1" />
+      <Edge From="6" To="7" Label="Source1" />
+      <Edge From="7" To="8" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>

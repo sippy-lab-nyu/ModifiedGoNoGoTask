@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.5.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:p1="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Sounds</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:Device">
+          <p1:PortName>COM3</p1:PortName>
+          <p1:DeviceState>Active</p1:DeviceState>
+          <p1:DumpRegisters>true</p1:DumpRegisters>
+          <p1:LedState>On</p1:LedState>
+          <p1:VisualIndicators>On</p1:VisualIndicators>
+          <p1:Heartbeat>Disable</p1:Heartbeat>
+          <p1:IgnoreErrors>false</p1:IgnoreErrors>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:CreateHarpMessage">
+          <p1:MessageType>Write</p1:MessageType>
+          <p1:Address>32</p1:Address>
+          <p1:PayloadType>U8</p1:PayloadType>
+          <p1:Payload>0</p1:Payload>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:IgnoreElements" />
+      </Expression>
+      <Expression xsi:type="BehaviorSubject">
+        <Name>Sounds</Name>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="1" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="3" To="4" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>
