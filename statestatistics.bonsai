@@ -606,9 +606,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>20</p1:Trial>
+          <p1:Trial>2</p1:Trial>
           <p1:Id>Response</p1:Id>
-          <p1:ElapsedTime>47130.599884799994</p1:ElapsedTime>
+          <p1:ElapsedTime>33131.56704</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -622,9 +622,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>20</p1:Trial>
+          <p1:Trial>2</p1:Trial>
           <p1:Id>Joystick</p1:Id>
-          <p1:ElapsedTime>47035.9847552</p1:ElapsedTime>
+          <p1:ElapsedTime>33114.7651072</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -648,7 +648,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>20</p1:Trial>
+          <p1:Trial>2</p1:Trial>
           <p1:Id>Lick</p1:Id>
           <p1:ElapsedTime>42380.702207999995</p1:ElapsedTime>
         </Combinator>
@@ -680,8 +680,8 @@
       <Expression xsi:type="BehaviorSubject">
         <Name>PreviousResponse</Name>
       </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="Extensions\SoftSoundCard.bonsai" />
-      <Expression xsi:type="IncludeWorkflow" Path="Extensions\SoftJoystick.bonsai" />
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\HarpSoundCard.bonsai" />
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\HarpJoystick.bonsai" />
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
