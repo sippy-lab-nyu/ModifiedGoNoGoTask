@@ -258,16 +258,20 @@
     <WindowState>Normal</WindowState>
   </DialogSettings>
   <DialogSettings>
-    <Visible>false</Visible>
+    <Visible>true</Visible>
     <Location>
-      <X>0</X>
-      <Y>0</Y>
+      <X>402</X>
+      <Y>110</Y>
     </Location>
     <Size>
-      <Width>0</Width>
-      <Height>0</Height>
+      <Width>334</Width>
+      <Height>278</Height>
     </Size>
     <WindowState>Normal</WindowState>
+    <VisualizerTypeName>ResponseVisualizer</VisualizerTypeName>
+    <VisualizerSettings>
+      <ResponseVisualizer />
+    </VisualizerSettings>
   </DialogSettings>
   <DialogSettings>
     <Visible>false</Visible>
@@ -512,8 +516,8 @@
   <DialogSettings>
     <Visible>true</Visible>
     <Location>
-      <X>704</X>
-      <Y>333</Y>
+      <X>320</X>
+      <Y>439</Y>
     </Location>
     <Size>
       <Width>334</Width>

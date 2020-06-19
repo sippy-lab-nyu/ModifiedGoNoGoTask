@@ -10,22 +10,6 @@ using ZedGraph;
 
 [assembly: TypeVisualizer(typeof(StateVisualizer), Target = typeof(StateDescriptor))]
 
-public static class ColorMap
-{
-    public static readonly Dictionary<StateId, Color> Default = new Dictionary<StateId, Color>
-    {
-        { StateId.ITI, Color.Gray },
-        { StateId.Go, Color.Orange },
-        { StateId.NoGo, Color.Yellow },
-        { StateId.Response, Color.Green },
-        { StateId.Timeout, Color.Red },
-        { StateId.Annotation, Color.Black },
-        { StateId.Joystick, Color.IndianRed },
-        { StateId.Lick, Color.LemonChiffon },
-        { StateId.Blink, Color.Violet }
-    };
-}
-
 public class StateVisualizer : DialogTypeVisualizer
 {
     static readonly string[] StateLabels = Enum.GetNames(typeof(StateId));
@@ -74,6 +58,22 @@ public class StateVisualizer : DialogTypeVisualizer
             }
         }
     }
+
+    public static class ColorMap
+{
+    public static readonly Dictionary<StateId, Color> Default = new Dictionary<StateId, Color>
+    {
+        { StateId.ITI, Color.Gray },
+        { StateId.Go, Color.Orange },
+        { StateId.NoGo, Color.Yellow },
+        { StateId.Response, Color.Green },
+        { StateId.Timeout, Color.Red },
+        { StateId.Annotation, Color.Black },
+        { StateId.Joystick, Color.IndianRed },
+        { StateId.Lick, Color.LemonChiffon },
+        { StateId.Blink, Color.Violet }
+    };
+}
 
     class RasterPointList : IPointListEdit
     {

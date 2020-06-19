@@ -15,6 +15,18 @@ public class ResponseVisualizer : DialogTypeVisualizer
     static readonly string[] ResponseLabels = Enum.GetNames(typeof(ResponseId));
     static readonly ResponseId[] ResponseValues = (ResponseId[])Enum.GetValues(typeof(ResponseId));
     GraphControl graph;
+    IPointListEdit[] rates;
+
+    public static class ColorMap
+    {
+        public static readonly Dictionary<ResponseId, Color> Default = new Dictionary<ResponseId, Color>
+        {
+            { ResponseId.Hit, Color.Green },
+            { ResponseId.Miss, Color.Orange },
+            { ResponseId.FalseAlarm, Color.IndianRed },
+            { ResponseId.CorrectRejection, Color.LemonChiffon }
+        };
+    }
 
     public override void Load(IServiceProvider provider)
     {
@@ -25,8 +37,8 @@ public class ResponseVisualizer : DialogTypeVisualizer
         var indexAxis = graph.GraphPane.XAxis;
         indexAxis.Title.IsVisible = true;
         indexAxis.Title.Text = "Trial";
-        indexAxis.Type = AxisType.Text;
-        indexAxis.Scale.IsReverse = true;
+        indexAxis.Scale.Format = "F0";
+        indexAxis.Type = AxisType.LinearAsOrdinal;
         indexAxis.MinorTic.IsAllTics = false;
         indexAxis.MajorTic.IsInside = false;
         indexAxis.ScaleFormatEvent += (scaleGraph, axis, value, index) =>
@@ -35,6 +47,14 @@ public class ResponseVisualizer : DialogTypeVisualizer
             var series = scaleGraph.CurveList[0];
             return index < series.NPts ? series[index].Tag as string : null;
         };
+
+        rates = new IPointListEdit[ResponseValues.Length];
+        for (int i = 0; i < rates.Length; i++)
+        {
+            rates[i] = new PointPairList();
+            if (i % 2 != 0) continue;
+            graph.GraphPane.AddCurve(ResponseLabels[i], rates[i], ColorMap.Default[ResponseValues[i]]);
+        }
 
         var visualizerService = (IDialogTypeVisualizerService)provider.GetService(typeof(IDialogTypeVisualizerService));
         if (visualizerService != null)
@@ -46,6 +66,10 @@ public class ResponseVisualizer : DialogTypeVisualizer
     public override void Show(object value)
     {
         var descriptor = (ResponseDescriptor)value;
+        rates[(int)ResponseId.Hit].Add(descriptor.Epoch, (float)descriptor.Hits / descriptor.Epoch);
+        rates[(int)ResponseId.Miss].Add(descriptor.Epoch, (float)descriptor.Misses / descriptor.Epoch);
+        rates[(int)ResponseId.FalseAlarm].Add(descriptor.Epoch, (float)descriptor.FalseAlarms / descriptor.Epoch);
+        rates[(int)ResponseId.CorrectRejection].Add(descriptor.Epoch, (float)descriptor.CorrectRejections / descriptor.Epoch);
         graph.Invalidate();
     }
 

@@ -23,6 +23,7 @@ public class ResponseStatistics
     {
         return source.Scan(new ResponseDescriptor(), (stats, response) =>
         {
+            stats.Epoch++;
             switch (response)
             {
                 case ResponseId.Hit: stats.Hits++; break;

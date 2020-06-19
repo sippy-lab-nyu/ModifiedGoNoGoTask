@@ -133,7 +133,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Delay">
-                <rx:DueTime>PT4S</rx:DueTime>
+                <rx:DueTime>PT3S</rx:DueTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -606,9 +606,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>0</p1:Trial>
-          <p1:Id>ITI</p1:Id>
-          <p1:ElapsedTime>42411.1826944</p1:ElapsedTime>
+          <p1:Trial>20</p1:Trial>
+          <p1:Id>Response</p1:Id>
+          <p1:ElapsedTime>47130.599884799994</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -622,9 +622,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>0</p1:Trial>
+          <p1:Trial>20</p1:Trial>
           <p1:Id>Joystick</p1:Id>
-          <p1:ElapsedTime>42409.4055552</p1:ElapsedTime>
+          <p1:ElapsedTime>47035.9847552</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -648,7 +648,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>0</p1:Trial>
+          <p1:Trial>20</p1:Trial>
           <p1:Id>Lick</p1:Id>
           <p1:ElapsedTime>42380.702207999995</p1:ElapsedTime>
         </Combinator>
