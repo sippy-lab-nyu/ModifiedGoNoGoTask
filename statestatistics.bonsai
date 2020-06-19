@@ -268,12 +268,12 @@
               <SoundIndex>2</SoundIndex>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:TrialResult">
-                <p1:Result>Success</p1:Result>
+              <Combinator xsi:type="p1:TrialResponse">
+                <p1:Response>Hit</p1:Response>
               </Combinator>
             </Expression>
             <Expression xsi:type="Condition">
-              <Name>Failure</Name>
+              <Name>Miss</Name>
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
@@ -292,8 +292,8 @@
               <SoundIndex>3</SoundIndex>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:TrialResult">
-                <p1:Result>Failure</p1:Result>
+              <Combinator xsi:type="p1:TrialResponse">
+                <p1:Response>Miss</p1:Response>
               </Combinator>
             </Expression>
             <Expression xsi:type="Condition">
@@ -420,8 +420,8 @@
               <SoundIndex>2</SoundIndex>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:TrialResult">
-                <p1:Result>Success</p1:Result>
+              <Combinator xsi:type="p1:TrialResponse">
+                <p1:Response>Hit</p1:Response>
               </Combinator>
             </Expression>
             <Expression xsi:type="Condition">
@@ -449,8 +449,8 @@
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:TrialResult">
-                <p1:Result>Success</p1:Result>
+              <Combinator xsi:type="p1:TrialResponse">
+                <p1:Response>Hit</p1:Response>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -564,23 +564,17 @@
       <Expression xsi:type="MulticastSubject">
         <Name>PreviousResponse</Name>
       </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="p1:ResultStatistics" />
-        </Builder>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:ResponseStatistics" />
       </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="rx:ElementIndex" />
-        </Builder>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:ElementIndex" />
       </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="viz:LineGraphBuilder">
-          <viz:ValueSelector>Index,Value.Success</viz:ValueSelector>
-          <viz:SymbolType>None</viz:SymbolType>
-          <viz:LineWidth>1</viz:LineWidth>
-          <viz:Capacity xsi:nil="true" />
-        </Builder>
+      <Expression xsi:type="viz:LineGraphBuilder">
+        <viz:ValueSelector>Index,Value.Hits</viz:ValueSelector>
+        <viz:SymbolType>None</viz:SymbolType>
+        <viz:LineWidth>1</viz:LineWidth>
+        <viz:Capacity xsi:nil="true" />
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>State</Name>
@@ -827,9 +821,9 @@
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="PropertySource" TypeArguments="p1:TrialResult,p1:ResultId">
+      <Expression xsi:type="PropertySource" TypeArguments="p1:TrialResponse,p1:ResponseId">
         <MemberName>Result</MemberName>
-        <Value>Success</Value>
+        <Value>Hit</Value>
       </Expression>
       <Expression xsi:type="BehaviorSubject">
         <Name>PreviousResponse</Name>

@@ -8,17 +8,17 @@ using System.Reactive.Linq;
 [Combinator]
 [Description("")]
 [WorkflowElementCategory(ElementCategory.Transform)]
-public class TrialResult : INamedElement
+public class TrialResponse : INamedElement
 {
-    public ResultId Result { get; set; }
+    public ResponseId Response { get; set; }
 
     string INamedElement.Name
     {
-        get { return Result.ToString(); }
+        get { return Response.ToString(); }
     }
 
-    public IObservable<ResultId> Process<TSource>(IObservable<TSource> source)
+    public IObservable<ResponseId> Process<TSource>(IObservable<TSource> source)
     {
-        return source.Select(value => Result);
+        return source.Select(value => Response);
     }
 }
