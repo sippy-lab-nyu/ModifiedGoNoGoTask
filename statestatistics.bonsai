@@ -133,7 +133,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Delay">
-                <rx:DueTime>PT4S</rx:DueTime>
+                <rx:DueTime>PT3S</rx:DueTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -191,34 +191,7 @@
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
-                    <Name>Joystick</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="dsp:Difference">
-                      <dsp:Order>1</dsp:Order>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="Value" DisplayName="Threshold" />
-                  </Expression>
-                  <Expression xsi:type="GreaterThan">
-                    <Operand xsi:type="DoubleProperty">
-                      <Value>0</Value>
-                    </Operand>
-                  </Expression>
-                  <Expression xsi:type="Condition">
-                    <Name>Movement</Name>
-                    <Workflow>
-                      <Nodes>
-                        <Expression xsi:type="WorkflowInput">
-                          <Name>Source1</Name>
-                        </Expression>
-                        <Expression xsi:type="WorkflowOutput" />
-                      </Nodes>
-                      <Edges>
-                        <Edge From="0" To="1" Label="Source1" />
-                      </Edges>
-                    </Workflow>
+                    <Name>Threshold</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="BooleanProperty">
@@ -236,15 +209,11 @@
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
                   <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="9" Label="Source2" />
+                  <Edge From="2" To="5" Label="Source2" />
                   <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="6" Label="Source1" />
-                  <Edge From="5" To="6" Label="Source2" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source1" />
-                  <Edge From="10" To="11" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -606,9 +575,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>11</p1:Trial>
-          <p1:Id>ITI</p1:Id>
-          <p1:ElapsedTime>3964.0553216</p1:ElapsedTime>
+          <p1:Trial>6</p1:Trial>
+          <p1:Id>Go</p1:Id>
+          <p1:ElapsedTime>46604.850816</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -622,9 +591,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>11</p1:Trial>
+          <p1:Trial>6</p1:Trial>
           <p1:Id>Joystick</p1:Id>
-          <p1:ElapsedTime>3961.0753535999997</p1:ElapsedTime>
+          <p1:ElapsedTime>46601.8103296</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -648,9 +617,9 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateTransition">
-          <p1:Trial>11</p1:Trial>
+          <p1:Trial>6</p1:Trial>
           <p1:Id>Lick</p1:Id>
-          <p1:ElapsedTime>3939.9125248</p1:ElapsedTime>
+          <p1:ElapsedTime>6218.091072</p1:ElapsedTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -680,8 +649,12 @@
       <Expression xsi:type="BehaviorSubject">
         <Name>PreviousResponse</Name>
       </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="Extensions\HarpSoundCard.bonsai" />
-      <Expression xsi:type="IncludeWorkflow" Path="Extensions\HarpJoystick.bonsai" />
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\SoftSoundCard.bonsai" />
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\SoftJoystick.bonsai" />
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Joystick</Name>
+      </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\TrialGraph.bonsai" />
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -724,6 +697,7 @@
       <Edge From="41" To="42" Label="Source1" />
       <Edge From="42" To="43" Label="Source1" />
       <Edge From="44" To="45" Label="Source1" />
+      <Edge From="48" To="49" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
