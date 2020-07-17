@@ -9,6 +9,8 @@
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
+                 xmlns:p4="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
+                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -868,6 +870,19 @@ Item2 as X,
           </Edges>
         </Workflow>
       </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Sounds</Name>
+      </Expression>
+      <Expression xsi:type="p4:Parse">
+        <p4:Type>U16</p4:Type>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>sounds.csv</io:FileName>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>Timestamp</io:Suffix>
+        <io:IncludeHeader>false</io:IncludeHeader>
+      </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -919,6 +934,8 @@ Item2 as X,
       <Edge From="52" To="53" Label="Source1" />
       <Edge From="56" To="57" Label="Source1" />
       <Edge From="57" To="58" Label="Source1" />
+      <Edge From="59" To="60" Label="Source1" />
+      <Edge From="60" To="61" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
