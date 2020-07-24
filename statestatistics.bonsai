@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.5.0"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -510,10 +510,9 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:ElementIndex" />
       </Expression>
-      <Expression xsi:type="viz:LineGraphBuilder">
-        <viz:ValueSelector>Index,Value.Hits</viz:ValueSelector>
-        <viz:SymbolType>None</viz:SymbolType>
-        <viz:LineWidth>1</viz:LineWidth>
+      <Expression xsi:type="viz:RollingGraphBuilder">
+        <viz:IndexSelector>Index</viz:IndexSelector>
+        <viz:ValueSelector>Value.Hits,Value.FalseAlarms</viz:ValueSelector>
         <viz:Capacity xsi:nil="true" />
       </Expression>
       <Expression xsi:type="SubscribeSubject">
