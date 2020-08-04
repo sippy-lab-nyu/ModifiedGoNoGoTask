@@ -12,7 +12,7 @@ using ZedGraph;
 
 public class ResponseVisualizer : DialogTypeVisualizer
 {
-    const string TitleLabel = "Total Trials: {0} Total Rewards: {1}";
+    const string TitleLabel = "Total Go Trials: {0} Total No-Go Trials {1} \nTotal Rewards: {2}";
     static readonly string[] ResponseLabels = Enum.GetNames(typeof(ResponseId));
     static readonly ResponseId[] ResponseValues = (ResponseId[])Enum.GetValues(typeof(ResponseId));
     GraphControl graph;
@@ -58,7 +58,7 @@ public class ResponseVisualizer : DialogTypeVisualizer
         }
 
         graph.GraphPane.Title.IsVisible = true;
-        graph.GraphPane.Title.Text = string.Format(TitleLabel, 0, 0);
+        graph.GraphPane.Title.Text = string.Format(TitleLabel, 0, 0, 0);
         var visualizerService = (IDialogTypeVisualizerService)provider.GetService(typeof(IDialogTypeVisualizerService));
         if (visualizerService != null)
         {
@@ -73,7 +73,10 @@ public class ResponseVisualizer : DialogTypeVisualizer
         rates[(int)ResponseId.Miss].Add(descriptor.Epoch, (float)descriptor.Misses / descriptor.Epoch);
         rates[(int)ResponseId.FalseAlarm].Add(descriptor.Epoch, (float)descriptor.FalseAlarms / descriptor.Epoch);
         rates[(int)ResponseId.CorrectRejection].Add(descriptor.Epoch, (float)descriptor.CorrectRejections / descriptor.Epoch);
-        graph.GraphPane.Title.Text = string.Format(TitleLabel, descriptor.Epoch, descriptor.Hits);
+        graph.GraphPane.Title.Text = string.Format(TitleLabel, 
+            descriptor.Hits + descriptor.Misses, 
+            descriptor.FalseAlarms + descriptor.CorrectRejections,
+            descriptor.Hits);
         graph.Invalidate();
     }
 
