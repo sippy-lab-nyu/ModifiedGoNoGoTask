@@ -186,6 +186,8 @@ public class StateVisualizer : DialogTypeVisualizer
         graph.Dock = DockStyle.Fill;
         graph.GraphPane.BarSettings.Base = BarBase.Y;
         graph.GraphPane.BarSettings.Type = BarType.Stack;
+        graph.GraphPane.XAxis.Title.IsVisible = true;
+        graph.GraphPane.XAxis.Title.Text = "Time (sec)";
         var indexAxis = graph.GraphPane.YAxis;
         indexAxis.Title.IsVisible = true;
         indexAxis.Title.Text = "Trial";
