@@ -3,8 +3,9 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:p1="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:p1="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                 xmlns:p2="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -75,6 +76,20 @@
       <Expression xsi:type="PublishSubject">
         <Name>Reward</Name>
       </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p2:CreateHarpMessage">
+          <p2:MessageType>Write</p2:MessageType>
+          <p2:Address>32</p2:Address>
+          <p2:PayloadType>U8</p2:PayloadType>
+          <p2:Payload>0</p2:Payload>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:IgnoreElements" />
+      </Expression>
+      <Expression xsi:type="BehaviorSubject">
+        <Name>Commands</Name>
+      </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -89,6 +104,8 @@
       <Edge From="10" To="11" Label="Source1" />
       <Edge From="12" To="13" Label="Source1" />
       <Edge From="13" To="14" Label="Source1" />
+      <Edge From="15" To="16" Label="Source1" />
+      <Edge From="16" To="17" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
