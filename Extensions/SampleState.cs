@@ -23,7 +23,7 @@ public class SampleState
                 state =>
                 {
                     synchronized.OnNext(state);
-                    if (currentState.Id < StateId.Annotation)
+                    if (state.Id < StateId.Annotation)
                     {
                         baseTime = HighResolutionScheduler.Now;
                         currentState = state;
