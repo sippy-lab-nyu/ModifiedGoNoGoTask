@@ -9,8 +9,11 @@ public enum StateId
     Annotation,
 
     Joystick,
-
     Lick,
+    Blink,
 
-    Blink
+    Hit,
+    Miss,
+    FalseAlarm,
+    CorrectRejection
 }
