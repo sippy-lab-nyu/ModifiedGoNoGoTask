@@ -333,27 +333,15 @@
         <EditorDialogSettings>
           <Visible>false</Visible>
           <Location>
-            <X>620</X>
-            <Y>190</Y>
+            <X>16</X>
+            <Y>103</Y>
           </Location>
           <Size>
-            <Width>1033</Width>
-            <Height>818</Height>
+            <Width>1303</Width>
+            <Height>657</Height>
           </Size>
           <WindowState>Normal</WindowState>
         </EditorDialogSettings>
-      </DialogSettings>
-      <DialogSettings>
-        <Visible>false</Visible>
-        <Location>
-          <X>0</X>
-          <Y>0</Y>
-        </Location>
-        <Size>
-          <Width>0</Width>
-          <Height>0</Height>
-        </Size>
-        <WindowState>Normal</WindowState>
       </DialogSettings>
       <DialogSettings>
         <Visible>false</Visible>
