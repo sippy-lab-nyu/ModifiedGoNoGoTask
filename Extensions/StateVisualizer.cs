@@ -71,7 +71,11 @@ public class StateVisualizer : DialogTypeVisualizer
         { StateId.Annotation, Color.Black },
         { StateId.Joystick, Color.IndianRed },
         { StateId.Lick, Color.LemonChiffon },
-        { StateId.Blink, Color.Violet }
+        { StateId.Blink, Color.Violet },
+        { StateId.Hit, Color.Transparent},
+        { StateId.Miss, Color.Transparent},
+        { StateId.CorrectRejection, Color.Transparent},
+        { StateId.FalseAlarm, Color.Transparent},
     };
 }
 
