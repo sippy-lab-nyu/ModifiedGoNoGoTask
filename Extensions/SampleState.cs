@@ -37,7 +37,7 @@ public class SampleState
                         output.Id = state.Id;
                         output.Trial = state.Trial;
                         output.ElapsedTime = timestamp;
-                        synchronized.OnNext(state);
+                        synchronized.OnNext(output);
                     }
                 },
                 synchronized.OnError,
