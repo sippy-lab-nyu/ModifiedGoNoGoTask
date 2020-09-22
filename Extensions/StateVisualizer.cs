@@ -12,6 +12,7 @@ using ZedGraph;
 
 public class StateVisualizer : DialogTypeVisualizer
 {
+    static readonly TimeSpan TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 30);
     static readonly string[] StateLabels = Enum.GetNames(typeof(StateId));
     static readonly StateId[] StateValues = (StateId[])Enum.GetValues(typeof(StateId));
 
@@ -19,6 +20,7 @@ public class StateVisualizer : DialogTypeVisualizer
     IPointListEdit[] barSeries;
     IPointListEdit[] rasterSeries;
     int ordinalCounter;
+    DateTimeOffset updateTime;
 
 
     public StateVisualizer()
@@ -224,12 +226,21 @@ public class StateVisualizer : DialogTypeVisualizer
         }
     }
 
+    internal void UpdateView(DateTime time)
+    {
+        if ((time - updateTime) > TargetElapsedTime)
+        {
+            graph.Invalidate();
+            updateTime = time;
+        }
+    }
+
     public override void Show(object value)
     {
         var descriptor = (StateDescriptor)value;
         AddStatistics(descriptor.Trial.ToString(), descriptor.Statistics);
         AddEvents(descriptor.Trial, descriptor.Events);
-        graph.Invalidate();
+        UpdateView(DateTime.Now);
     }
 
     public override void Unload()
