@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.5.1"
+<WorkflowBuilder Version="2.5.0"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:p1="clr-namespace:;assembly=Extensions"
@@ -9,8 +9,7 @@
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:p4="clr-namespace:Bonsai.Harp.CF;assembly=Bonsai.Harp.CF"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
-                 xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
-                 xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
+                 xmlns:p5="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -1202,6 +1201,9 @@ Item1 as Value)</scr:Expression>
 0.0 as X,
 0.0 as Y)</scr:Expression>
                                     </Expression>
+                                    <Expression xsi:type="MemberSelector">
+                                      <Selector>X,Y</Selector>
+                                    </Expression>
                                     <Expression xsi:type="Combinator">
                                       <Combinator xsi:type="rx:IgnoreElements" />
                                     </Expression>
@@ -1215,6 +1217,7 @@ Item1 as Value)</scr:Expression>
                                     <Edge From="1" To="2" Label="Source1" />
                                     <Edge From="2" To="3" Label="Source1" />
                                     <Edge From="3" To="4" Label="Source1" />
+                                    <Edge From="4" To="5" Label="Source1" />
                                   </Edges>
                                 </Workflow>
                               </Expression>
@@ -1272,6 +1275,9 @@ Item2 as X,
                                     <Expression xsi:type="Combinator">
                                       <Combinator xsi:type="rx:Merge" />
                                     </Expression>
+                                    <Expression xsi:type="MemberSelector">
+                                      <Selector>X,Y</Selector>
+                                    </Expression>
                                     <Expression xsi:type="Combinator">
                                       <Combinator xsi:type="rx:ToArray" />
                                     </Expression>
@@ -1286,6 +1292,7 @@ Item2 as X,
                                     <Edge From="3" To="4" Label="Source3" />
                                     <Edge From="4" To="5" Label="Source1" />
                                     <Edge From="5" To="6" Label="Source1" />
+                                    <Edge From="6" To="7" Label="Source1" />
                                   </Edges>
                                 </Workflow>
                               </Expression>
@@ -1308,25 +1315,12 @@ Item2 as X,
                             </Edges>
                           </Workflow>
                         </Expression>
-                        <Expression xsi:type="ExternalizedMapping">
-                          <Property Name="ValueSelector" />
-                          <Property Name="SymbolType" />
-                          <Property Name="LineWidth" />
-                          <Property Name="Capacity" />
-                        </Expression>
-                        <Expression xsi:type="viz:LineGraphBuilder">
-                          <viz:SymbolType>None</viz:SymbolType>
-                          <viz:LineWidth>1</viz:LineWidth>
-                          <viz:Capacity xsi:nil="true" />
-                        </Expression>
                         <Expression xsi:type="WorkflowOutput" />
                       </Nodes>
                       <Edges>
                         <Edge From="0" To="1" Label="Source1" />
                         <Edge From="1" To="2" Label="Source1" />
-                        <Edge From="2" To="4" Label="Source1" />
-                        <Edge From="3" To="4" Label="Source2" />
-                        <Edge From="4" To="5" Label="Source1" />
+                        <Edge From="2" To="3" Label="Source1" />
                       </Edges>
                     </Workflow>
                   </Expression>
@@ -1341,9 +1335,8 @@ Item2 as X,
             <Expression xsi:type="SubscribeSubject">
               <Name>Sounds</Name>
             </Expression>
-            <Expression xsi:type="harp:Parse">
-              <harp:Type>U16</harp:Type>
-              <harp:IsArray>false</harp:IsArray>
+            <Expression xsi:type="p5:Parse">
+              <p5:Type>U16</p5:Type>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>Path</Name>
