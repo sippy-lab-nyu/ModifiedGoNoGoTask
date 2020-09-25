@@ -18,40 +18,37 @@ public class SampleState
         {
             var currentState = default(StateInfo);
             var baseTime = HighResolutionScheduler.Now;
-            var synchronized = Observer.Synchronize(observer);
-            var stateObserver = Observer.Create<StateInfo>(
+            var synchronized = Observer.Create<StateInfo>(
                 state =>
                 {
-                    synchronized.OnNext(state);
-                    if (state.Id < StateId.Annotation)
-                    {
-                        baseTime = HighResolutionScheduler.Now;
-                        currentState = state;
-                    }
-                },
-                synchronized.OnError,
-                synchronized.OnCompleted);
-
-            var sampleTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(50));
-            var sampleObserver = Observer.Create<long>(
-                tick =>
-                {
-                    var state = currentState;
                     if (state != null)
                     {
-                        var deltaTime = HighResolutionScheduler.Now - baseTime;
-                        var output = new StateInfo();
-                        output.Id = state.Id;
-                        output.Trial = state.Trial;
-                        output.ElapsedTime = state.ElapsedTime + deltaTime.TotalSeconds;
-                        synchronized.OnNext(output);
+                        observer.OnNext(state);
+                        if (state.Id < StateId.Annotation)
+                        {
+                            baseTime = HighResolutionScheduler.Now;
+                            currentState = state;
+                        }
+                    }
+                    else
+                    {
+                        state = currentState;
+                        if (state != null)
+                        {
+                            var deltaTime = HighResolutionScheduler.Now - baseTime;
+                            var output = new StateInfo();
+                            output.Id = state.Id;
+                            output.Trial = state.Trial;
+                            output.ElapsedTime = state.ElapsedTime + deltaTime.TotalSeconds;
+                            observer.OnNext(output);
+                        }
                     }
                 },
-                synchronized.OnError,
-                synchronized.OnCompleted);
-            return new CompositeDisposable(
-                source.SubscribeSafe(stateObserver),
-                sampleTimer.SubscribeSafe(sampleObserver));
+                observer.OnError,
+                observer.OnCompleted);
+
+            var sampleTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(50));
+            return source.Merge(sampleTimer.Select(tick => default(StateInfo))).SubscribeSafe(synchronized);
         });
     }
 }
