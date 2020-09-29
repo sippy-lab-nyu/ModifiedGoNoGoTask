@@ -2,53 +2,26 @@
 <VisualizerLayout xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  >
-  <DialogSettings xsi:type="WorkflowEditorSettings">
+  <DialogSettings>
     <Visible>true</Visible>
     <Location>
-      <X>20</X>
-      <Y>127</Y>
+      <X>1009</X>
+      <Y>110</Y>
     </Location>
     <Size>
-      <Width>761</Width>
-      <Height>605</Height>
+      <Width>686</Width>
+      <Height>546</Height>
     </Size>
     <WindowState>Normal</WindowState>
     <VisualizerTypeName>VisualizerGrid</VisualizerTypeName>
     <VisualizerSettings>
-      <VisualizerGrid>
-        <Bounds>
-          <Location>
-            <X>0</X>
-            <Y>0</Y>
-          </Location>
-          <Size>
-            <Width>800</Width>
-            <Height>600</Height>
-          </Size>
-          <X>0</X>
-          <Y>0</Y>
-          <Width>800</Width>
-          <Height>600</Height>
-        </Bounds>
-      </VisualizerGrid>
+      <VisualizerGrid />
     </VisualizerSettings>
     <Mashups>
       <int>2</int>
       <int>3</int>
       <int>1</int>
     </Mashups>
-    <EditorDialogSettings>
-      <Visible>false</Visible>
-      <Location>
-        <X>3</X>
-        <Y>3</Y>
-      </Location>
-      <Size>
-        <Width>1061</Width>
-        <Height>589</Height>
-      </Size>
-      <WindowState>Normal</WindowState>
-    </EditorDialogSettings>
   </DialogSettings>
   <DialogSettings>
     <Visible>false</Visible>
@@ -99,5 +72,17 @@
     <VisualizerSettings>
       <ResponseVisualizer />
     </VisualizerSettings>
+  </DialogSettings>
+  <DialogSettings>
+    <Visible>false</Visible>
+    <Location>
+      <X>0</X>
+      <Y>0</Y>
+    </Location>
+    <Size>
+      <Width>0</Width>
+      <Height>0</Height>
+    </Size>
+    <WindowState>Normal</WindowState>
   </DialogSettings>
 </VisualizerLayout>
