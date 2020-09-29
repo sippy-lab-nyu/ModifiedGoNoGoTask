@@ -23,7 +23,7 @@ public class WindowMemory : ZeroArgumentExpressionBuilder
             var mainForm = (Form)Application.OpenForms.Cast<Form>().FirstOrDefault();
             if (mainForm != null)
             {
-                return mainForm.DesktopBounds;
+                return bounds = mainForm.DesktopBounds;
             }
             else return bounds;
         }
