@@ -5,6 +5,21 @@
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Joystick Threshold" />
+        <Property Name="NoGo Tone" />
+        <Property Name="Go Tone" />
+        <Property Name="Reward Tone" />
+        <Property Name="Miss Tone" />
+        <Property Name="Lower Bound ITI Duration " />
+        <Property Name="Upper Bound ITI Duration" />
+        <Property Name="Response Delay (ms)" />
+        <Property Name="Go Response Window (s)" />
+        <Property Name="NoGo Response Window (s)" />
+        <Property Name="Number of Trials" />
+        <Property Name="Path" />
+        <Property Name="Bounds" />
+      </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>TwoTone - Box 1</Name>
         <Workflow>
@@ -37,9 +52,31 @@
               <Number_x0020_of_x0020_Trials>100</Number_x0020_of_x0020_Trials>
               <Path>Data\Test</Path>
             </Expression>
+            <Expression xsi:type="ExternalizedMapping">
+              <Property Name="Bounds" Category="Window Settings" />
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="p1:WindowMemory">
+                <p1:Bounds>
+                  <p1:Location>
+                    <p1:X>509</p1:X>
+                    <p1:Y>130</p1:Y>
+                  </p1:Location>
+                  <p1:Size>
+                    <p1:Width>1099</p1:Width>
+                    <p1:Height>786</p1:Height>
+                  </p1:Size>
+                  <p1:X>509</p1:X>
+                  <p1:Y>130</p1:Y>
+                  <p1:Width>1099</p1:Width>
+                  <p1:Height>786</p1:Height>
+                </p1:Bounds>
+              </Combinator>
+            </Expression>
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -48,25 +85,9 @@
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="Extensions\JoystickVisualizer.bonsai" />
       <Expression xsi:type="IncludeWorkflow" Path="Extensions\ResponseStatistics.bonsai" />
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p1:WindowMemory">
-          <p1:Bounds>
-            <p1:Location>
-              <p1:X>0</p1:X>
-              <p1:Y>0</p1:Y>
-            </p1:Location>
-            <p1:Size>
-              <p1:Width>800</p1:Width>
-              <p1:Height>600</p1:Height>
-            </p1:Size>
-            <p1:X>0</p1:X>
-            <p1:Y>0</p1:Y>
-            <p1:Width>800</p1:Width>
-            <p1:Height>600</p1:Height>
-          </p1:Bounds>
-        </Combinator>
-      </Expression>
     </Nodes>
-    <Edges />
+    <Edges>
+      <Edge From="0" To="1" Label="Source1" />
+    </Edges>
   </Workflow>
 </WorkflowBuilder>

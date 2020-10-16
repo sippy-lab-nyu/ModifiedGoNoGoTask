@@ -3,11 +3,11 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:p1="clr-namespace:;assembly=Extensions"
-                 xmlns:p2="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
+                 xmlns:num="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:p3="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
+                 xmlns:p2="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
-                 xmlns:p4="clr-namespace:Bonsai.Harp.CF;assembly=Bonsai.Harp.CF"
+                 xmlns:p3="clr-namespace:Bonsai.Harp.CF;assembly=Bonsai.Harp.CF"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
@@ -45,7 +45,7 @@
               <Name>Joystick</Name>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p2:Abs" />
+              <Combinator xsi:type="num:Abs" />
             </Expression>
             <Expression xsi:type="ExternalizedMapping">
               <Property Name="Value" DisplayName="Joystick Threshold" Category="Joystick Properties" />
@@ -139,7 +139,7 @@
                     <Name>TrialDistribution</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p3:Sample" />
+                    <Combinator xsi:type="p2:Sample" />
                   </Expression>
                   <Expression xsi:type="Sink">
                     <Workflow>
@@ -249,13 +249,13 @@
                     <Property Name="Upper" DisplayName="Upper Bound ITI Duration" Category="ITI Duration (sec)" />
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p3:CreateContinuousUniform">
-                      <p3:Lower>2</p3:Lower>
-                      <p3:Upper>4</p3:Upper>
+                    <Combinator xsi:type="p2:CreateContinuousUniform">
+                      <p2:Lower>2</p2:Lower>
+                      <p2:Upper>4</p2:Upper>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p3:Sample" />
+                    <Combinator xsi:type="p2:Sample" />
                   </Expression>
                   <Expression xsi:type="scr:ExpressionTransform">
                     <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
@@ -267,7 +267,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
-                      <rx:DueTime>PT2.442S</rx:DueTime>
+                      <rx:DueTime>PT3.39S</rx:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -509,16 +509,16 @@
                             <Value>15</Value>
                           </Combinator>
                         </Expression>
-                        <Expression xsi:type="p4:BehaviorCommand">
-                          <p4:Type>PulsePeriod</p4:Type>
-                          <p4:Mask>Poke1Valve</p4:Mask>
+                        <Expression xsi:type="p3:BehaviorCommand">
+                          <p3:Type>PulsePeriod</p3:Type>
+                          <p3:Mask>Poke1Valve</p3:Mask>
                         </Expression>
                         <Expression xsi:type="MulticastSubject">
                           <Name>Commands</Name>
                         </Expression>
-                        <Expression xsi:type="p4:BehaviorCommand">
-                          <p4:Type>SetOutput</p4:Type>
-                          <p4:Mask>Poke1Valve</p4:Mask>
+                        <Expression xsi:type="p3:BehaviorCommand">
+                          <p3:Type>SetOutput</p3:Type>
+                          <p3:Mask>Poke1Valve</p3:Mask>
                         </Expression>
                         <Expression xsi:type="MulticastSubject">
                           <Name>Commands</Name>
@@ -929,7 +929,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>Data\Test\2020-09-29T14-26-18/ResponseStat.csv</io:FileName>
+              <io:FileName>Data\Test\2020-10-16T09-41-37/ResponseStat.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -970,9 +970,9 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateTransition">
-                <p1:Trial>1</p1:Trial>
+                <p1:Trial>5</p1:Trial>
                 <p1:Id>ITI</p1:Id>
-                <p1:ElapsedTime>4150440.782016</p1:ElapsedTime>
+                <p1:ElapsedTime>5602194.000032</p1:ElapsedTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -986,7 +986,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateTransition">
-                <p1:Trial>1</p1:Trial>
+                <p1:Trial>5</p1:Trial>
                 <p1:Id>Joystick</p1:Id>
                 <p1:ElapsedTime>4147645.902016</p1:ElapsedTime>
               </Combinator>
@@ -1012,7 +1012,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateTransition">
-                <p1:Trial>1</p1:Trial>
+                <p1:Trial>5</p1:Trial>
                 <p1:Id>Lick</p1:Id>
                 <p1:ElapsedTime>6218.091072</p1:ElapsedTime>
               </Combinator>
@@ -1046,21 +1046,21 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>Data\Test\2020-09-29T14-26-18/StateTransitions.csv</io:FileName>
+              <io:FileName>Data\Test\2020-10-16T09-41-37/StateTransitions.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
               <io:IncludeHeader>true</io:IncludeHeader>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p2:CreateRandom">
-                <p2:Seed xsi:nil="true" />
+              <Combinator xsi:type="num:CreateRandom">
+                <num:Seed xsi:nil="true" />
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p3:CreateDiscreteUniform">
-                <p3:Lower>0</p3:Lower>
-                <p3:Upper>1</p3:Upper>
+              <Combinator xsi:type="p2:CreateDiscreteUniform">
+                <p2:Lower>0</p2:Lower>
+                <p2:Upper>1</p2:Upper>
               </Combinator>
             </Expression>
             <Expression xsi:type="AsyncSubject">
@@ -1094,15 +1094,11 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>Data\Test\2020-09-29T14-26-18/sounds.csv</io:FileName>
+              <io:FileName>Data\Test\2020-10-16T09-41-37/sounds.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
               <io:IncludeHeader>false</io:IncludeHeader>
-            </Expression>
-            <Expression xsi:type="IncludeWorkflow" Path="Extensions\HarpCamera.bonsai" />
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="IncludeWorkflow" Path="Extensions\ManualCamera.bonsai" />
             </Expression>
             <Expression xsi:type="ExternalizedMapping">
               <Property Name="Value" DisplayName="Path" Category="Experiment Control" />
@@ -1123,6 +1119,10 @@
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\HarpSoundCard.bonsai" />
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\HarpJoystick.bonsai" />
+            <Expression xsi:type="IncludeWorkflow" Path="Extensions\ManualCamera.bonsai" />
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="IncludeWorkflow" Path="Extensions\HarpCamera.bonsai" />
+            </Expression>
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
@@ -1190,10 +1190,10 @@
             <Edge From="69" To="70" Label="Source1" />
             <Edge From="70" To="71" Label="Source1" />
             <Edge From="71" To="72" Label="Source2" />
+            <Edge From="73" To="74" Label="Source1" />
+            <Edge From="74" To="75" Label="Source1" />
             <Edge From="75" To="76" Label="Source1" />
             <Edge From="76" To="77" Label="Source1" />
-            <Edge From="77" To="78" Label="Source1" />
-            <Edge From="78" To="79" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -1356,7 +1356,7 @@ Item1 as Value)</scr:Expression>
                                       <Selector>Accumulation,Value</Selector>
                                     </Expression>
                                     <Expression xsi:type="Combinator">
-                                      <Combinator xsi:type="p2:Max" />
+                                      <Combinator xsi:type="num:Max" />
                                     </Expression>
                                     <Expression xsi:type="WorkflowOutput" />
                                   </Nodes>
@@ -1490,6 +1490,46 @@ Item2 as X,
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
             <Edge From="1" To="2" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>CameraVisualizer</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Camera</Name>
+            </Expression>
+            <Expression xsi:type="ExternalizedMapping">
+              <Property Name="Value" DisplayName="VisualizerFramerate" />
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="FloatProperty">
+                <Value>20</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="scr:ExpressionTransform">
+              <scr:Expression>TimeSpan.FromSeconds(1/it)</scr:Expression>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="Interval" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:GateInterval">
+                <rx:Interval>PT0S</rx:Interval>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="5" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="4" To="5" Label="Source2" />
+            <Edge From="5" To="6" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
