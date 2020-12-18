@@ -5,6 +5,7 @@ using Bonsai.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using ZedGraph;
 
@@ -13,8 +14,8 @@ using ZedGraph;
 public class ResponseVisualizer : DialogTypeVisualizer
 {
     const string TitleLabel = "Total Go Trials: {0} Total No-Go Trials {1} \nTotal Rewards: {2}";
-    static readonly string[] ResponseLabels = Enum.GetNames(typeof(ResponseId));
-    static readonly ResponseId[] ResponseValues = (ResponseId[])Enum.GetValues(typeof(ResponseId));
+    static readonly string[] ResponseLabels = Enum.GetNames(typeof(ResponseId)).Skip(1).ToArray();
+    static readonly ResponseId[] ResponseValues = ((ResponseId[])Enum.GetValues(typeof(ResponseId))).Skip(1).ToArray();
     GraphControl graph;
     IPointListEdit[] rates;
 
@@ -22,6 +23,7 @@ public class ResponseVisualizer : DialogTypeVisualizer
     {
         public static readonly Dictionary<ResponseId, Color> Default = new Dictionary<ResponseId, Color>
         {
+            { ResponseId.None, Color.Transparent },
             { ResponseId.Hit, Color.Green },
             { ResponseId.Miss, Color.Orange },
             { ResponseId.FalseAlarm, Color.IndianRed },
@@ -69,10 +71,10 @@ public class ResponseVisualizer : DialogTypeVisualizer
     public override void Show(object value)
     {
         var descriptor = (ResponseDescriptor)value;
-        rates[(int)ResponseId.Hit].Add(descriptor.Epoch, (float)descriptor.Hits / descriptor.Epoch);
-        rates[(int)ResponseId.Miss].Add(descriptor.Epoch, (float)descriptor.Misses / descriptor.Epoch);
-        rates[(int)ResponseId.FalseAlarm].Add(descriptor.Epoch, (float)descriptor.FalseAlarms / descriptor.Epoch);
-        rates[(int)ResponseId.CorrectRejection].Add(descriptor.Epoch, (float)descriptor.CorrectRejections / descriptor.Epoch);
+        rates[(int)ResponseId.Hit-1].Add(descriptor.Epoch, (float)descriptor.Hits / descriptor.Epoch);
+        rates[(int)ResponseId.Miss-1].Add(descriptor.Epoch, (float)descriptor.Misses / descriptor.Epoch);
+        rates[(int)ResponseId.FalseAlarm-1].Add(descriptor.Epoch, (float)descriptor.FalseAlarms / descriptor.Epoch);
+        rates[(int)ResponseId.CorrectRejection-1].Add(descriptor.Epoch, (float)descriptor.CorrectRejections / descriptor.Epoch);
         graph.GraphPane.Title.Text = string.Format(TitleLabel, 
             descriptor.Hits + descriptor.Misses, 
             descriptor.FalseAlarms + descriptor.CorrectRejections,
