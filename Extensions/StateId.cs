@@ -12,6 +12,7 @@ public enum StateId
     Lick,
     Blink,
 
+
     Hit,
     Miss,
     FalseAlarm,
