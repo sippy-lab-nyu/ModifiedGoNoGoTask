@@ -27,7 +27,9 @@ public class ResponseVisualizer : DialogTypeVisualizer
             { ResponseId.Hit, Color.Green },
             { ResponseId.Miss, Color.Orange },
             { ResponseId.FalseAlarm, Color.IndianRed },
-            { ResponseId.CorrectRejection, Color.LemonChiffon }
+            { ResponseId.CorrectRejection, Color.LemonChiffon },
+            { ResponseId.PullPenalty, Color.Transparent },
+            { ResponseId.EarlyResponse, Color.Transparent }
         };
     }
 
@@ -71,9 +73,9 @@ public class ResponseVisualizer : DialogTypeVisualizer
     public override void Show(object value)
     {
         var descriptor = (ResponseDescriptor)value;
-        rates[(int)ResponseId.Hit-1].Add(descriptor.Epoch, (float)descriptor.Hits / descriptor.Epoch);
+        rates[(int)ResponseId.Hit-1].Add(descriptor.Epoch, (float)descriptor.Hits / (descriptor.Hits + descriptor.Misses));
         rates[(int)ResponseId.Miss-1].Add(descriptor.Epoch, (float)descriptor.Misses / descriptor.Epoch);
-        rates[(int)ResponseId.FalseAlarm-1].Add(descriptor.Epoch, (float)descriptor.FalseAlarms / descriptor.Epoch);
+        rates[(int)ResponseId.FalseAlarm-1].Add(descriptor.Epoch, (float)descriptor.FalseAlarms / (descriptor.FalseAlarms + descriptor.CorrectRejections));
         rates[(int)ResponseId.CorrectRejection-1].Add(descriptor.Epoch, (float)descriptor.CorrectRejections / descriptor.Epoch);
         graph.GraphPane.Title.Text = string.Format(TitleLabel, 
             descriptor.Hits + descriptor.Misses, 

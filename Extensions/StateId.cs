@@ -16,5 +16,7 @@ public enum StateId
     Hit,
     Miss,
     FalseAlarm,
-    CorrectRejection
+    CorrectRejection,
+    PullPenalty,
+    EarlyResponse
 }

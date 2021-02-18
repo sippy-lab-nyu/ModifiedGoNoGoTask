@@ -4,5 +4,7 @@ public enum ResponseId
     Hit,
     Miss,
     FalseAlarm,
-    CorrectRejection
+    CorrectRejection,
+    PullPenalty,
+    EarlyResponse
 }

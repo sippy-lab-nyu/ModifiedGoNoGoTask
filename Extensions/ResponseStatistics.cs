@@ -12,6 +12,8 @@ public struct ResponseDescriptor
     public int Misses;
     public int FalseAlarms;
     public int CorrectRejections;
+    public int PullPenalty;
+    public int EarlyResponse;
 }
 
 [Combinator]
