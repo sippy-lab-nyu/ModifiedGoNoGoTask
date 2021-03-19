@@ -73,14 +73,15 @@ public class ResponseVisualizer : DialogTypeVisualizer
     public override void Show(object value)
     {
         var descriptor = (ResponseDescriptor)value;
-        rates[(int)ResponseId.Hit-1].Add(descriptor.Epoch, (float)descriptor.Hits / (descriptor.Hits + descriptor.Misses));
+        //rates[(int)ResponseId.Hit-1].Add(descriptor.Epoch, (float)descriptor.Hits / (descriptor.Hits + descriptor.Misses));
+        rates[(int)ResponseId.Hit-1].Add(descriptor.Epoch, (float)descriptor.Hits / (descriptor.TotalGoTrials));
         rates[(int)ResponseId.Miss-1].Add(descriptor.Epoch, (float)descriptor.Misses / descriptor.Epoch);
         rates[(int)ResponseId.FalseAlarm-1].Add(descriptor.Epoch, (float)descriptor.FalseAlarms / (descriptor.FalseAlarms + descriptor.CorrectRejections));
         rates[(int)ResponseId.CorrectRejection-1].Add(descriptor.Epoch, (float)descriptor.CorrectRejections / descriptor.Epoch);
         graph.GraphPane.Title.Text = string.Format(TitleLabel, 
-            descriptor.Hits + descriptor.Misses, 
-            descriptor.FalseAlarms + descriptor.CorrectRejections,
-            descriptor.Hits);
+            descriptor.TotalGoTrials,
+            descriptor.TotalNoGoTrials,
+            descriptor.TotalHits);
         graph.Invalidate();
     }
 

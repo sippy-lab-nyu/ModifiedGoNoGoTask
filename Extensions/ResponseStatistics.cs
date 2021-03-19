@@ -14,6 +14,13 @@ public struct ResponseDescriptor
     public int CorrectRejections;
     public int PullPenalty;
     public int EarlyResponse;
+
+    public int TotalHits;
+
+    public int TotalGoTrials;
+
+    public int TotalNoGoTrials;
+
 }
 
 [Combinator]
@@ -21,37 +28,55 @@ public struct ResponseDescriptor
 [WorkflowElementCategory(ElementCategory.Combinator)]
 public class ResponseStatistics
 {
-    void UpdateStatistics(ref ResponseDescriptor stats, ResponseId response)
+    void UpdateSlidingStatistics(ref ResponseDescriptor stats, ResponseId response)
     {
         stats.Epoch++;
         switch (response)
         {
             case ResponseId.Hit: stats.Hits++; break;
             case ResponseId.Miss: stats.Misses++; break;
+            case ResponseId.PullPenalty: stats.Misses++; break;
             case ResponseId.FalseAlarm: stats.FalseAlarms++; break;
             case ResponseId.CorrectRejection: stats.CorrectRejections++; break;
         }
     }
-
+    void UpdateTotalStatistics(ref ResponseDescriptor stats, ResponseId response)
+    {
+        stats.Epoch++;
+        switch (response)
+        {
+            case ResponseId.Hit: stats.TotalGoTrials++; stats.TotalHits++; break;
+            case ResponseId.Miss: stats.TotalGoTrials++; break;
+            case ResponseId.PullPenalty: stats.TotalGoTrials++; break;
+            case ResponseId.FalseAlarm: stats.TotalNoGoTrials++; break;
+            case ResponseId.CorrectRejection: stats.TotalNoGoTrials++; break;
+        }
+    }
     public IObservable<ResponseDescriptor> Process(IObservable<ResponseId> source)
     {
         return source.Scan(new ResponseDescriptor(), (stats, response) =>
         {
-            UpdateStatistics(ref stats, response);
+            UpdateSlidingStatistics(ref stats, response);
             return stats;
         });
+        
     }
 
     public IObservable<ResponseDescriptor> Process(IObservable<IList<ResponseId>> source)
     {
-        return source.Select(responses =>
+        return source.Scan(new ResponseDescriptor(), (stats, responses) =>
         {
-            var stats = new ResponseDescriptor();
+            stats.Hits = 0; 
+            stats.Misses = 0;
+            stats.FalseAlarms = 0;
+            stats.CorrectRejections = 0;
+            UpdateTotalStatistics (ref stats, responses[responses.Count - 1]);
             foreach(var response in responses)
             {
-                UpdateStatistics(ref stats, response);
+                 UpdateSlidingStatistics(ref stats, response);
             }
             return stats;
         });
+        
     }
 }
