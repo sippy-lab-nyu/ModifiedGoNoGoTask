@@ -6,8 +6,8 @@
                  xmlns:p2="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:p3="clr-namespace:Bonsai.Harp.CF;assembly=Bonsai.Harp.CF"
-                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:num="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
+                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
@@ -259,8 +259,8 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="p2:CreateContinuousUniform">
-                      <p2:Lower>2</p2:Lower>
-                      <p2:Upper>2</p2:Upper>
+                      <p2:Lower>1</p2:Lower>
+                      <p2:Upper>1</p2:Upper>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -276,7 +276,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
-                      <rx:DueTime>PT2S</rx:DueTime>
+                      <rx:DueTime>PT1S</rx:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="ExternalizedMapping">
@@ -1059,6 +1059,9 @@
                     <Combinator xsi:type="rx:CombineLatest" />
                   </Expression>
                   <Expression xsi:type="Subtract" />
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="num:Abs" />
+                  </Expression>
                   <Expression xsi:type="ExternalizedMapping">
                     <Property Name="Value" DisplayName="NoGo Threshold" />
                   </Expression>
@@ -1167,10 +1170,11 @@
                   <Edge From="74" To="75" Label="Source1" />
                   <Edge From="75" To="76" Label="Source2" />
                   <Edge From="76" To="77" Label="Source1" />
-                  <Edge From="77" To="79" Label="Source1" />
-                  <Edge From="78" To="79" Label="Source2" />
-                  <Edge From="79" To="80" Label="Source1" />
+                  <Edge From="77" To="78" Label="Source1" />
+                  <Edge From="78" To="80" Label="Source1" />
+                  <Edge From="79" To="80" Label="Source2" />
                   <Edge From="80" To="81" Label="Source1" />
+                  <Edge From="81" To="82" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -1194,7 +1198,7 @@
               <Name>ResponseStatistics</Name>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>Data\Test\2021-03-12T10-03-18/ResponseStat.csv</io:FileName>
+              <io:FileName>Data\Test\2021-03-19T10-19-58/ResponseStat.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1235,9 +1239,9 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateTransition">
-                <p1:Trial>2</p1:Trial>
+                <p1:Trial>16</p1:Trial>
                 <p1:Id>Response</p1:Id>
-                <p1:ElapsedTime>36206.1639936</p1:ElapsedTime>
+                <p1:ElapsedTime>37257.9298048</p1:ElapsedTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -1266,7 +1270,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>Data\Test\2021-03-12T10-03-18/StateTransitions.csv</io:FileName>
+              <io:FileName>Data\Test\2021-03-19T10-19-58/StateTransitions.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1326,7 +1330,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>Data\Test\2021-03-12T10-03-18/sounds.csv</io:FileName>
+              <io:FileName>Data\Test\2021-03-19T10-19-58/sounds.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
