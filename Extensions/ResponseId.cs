@@ -6,5 +6,9 @@ public enum ResponseId
     FalseAlarm,
     CorrectRejection,
     PullPenalty,
-    EarlyResponse
+    IncorrectAction,
+    EarlyResponse,
+    EarlyExit,
+    LeftHit,
+    RightHit
 }

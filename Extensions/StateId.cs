@@ -3,6 +3,8 @@ public enum StateId
     ITI,
     Go,
     NoGo,
+    Left,
+    Right,
     Response,
     Timeout,
 
@@ -10,6 +12,9 @@ public enum StateId
 
     Joystick,
     Lick,
+    LickLeft,
+    LickRight,
+    LickCenter,
     Blink,
 
 
@@ -17,6 +22,8 @@ public enum StateId
     Miss,
     FalseAlarm,
     CorrectRejection,
+    IncorrectAction,
     PullPenalty,
-    EarlyResponse
+    EarlyResponse,
+    EarlyExit
 }

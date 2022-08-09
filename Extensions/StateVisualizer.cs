@@ -68,18 +68,25 @@ public class StateVisualizer : DialogTypeVisualizer
         { StateId.ITI, Color.Gray },
         { StateId.Go, Color.ForestGreen },
         { StateId.NoGo, Color.Gold },
+        { StateId.Left, Color.LightYellow },
+        { StateId.Right, Color.LightGreen },
         { StateId.Response, Color.RoyalBlue },
         { StateId.Timeout, Color.Red },
         { StateId.Annotation, Color.Black },
         { StateId.Joystick, Color.White },
         { StateId.Lick, Color.HotPink },
+        { StateId.LickLeft, Color.Yellow },
+        { StateId.LickRight, Color.Green },
+        { StateId.LickCenter, Color.Black },
         { StateId.Blink, Color.Violet },
         { StateId.Hit, Color.Transparent},
         { StateId.Miss, Color.Transparent},
         { StateId.CorrectRejection, Color.Transparent},
         { StateId.FalseAlarm, Color.Transparent},
         { StateId.PullPenalty, Color.Transparent},
+        { StateId.IncorrectAction, Color.Transparent},
         { StateId.EarlyResponse, Color.Transparent},
+        { StateId.EarlyExit, Color.Transparent}
     };
 }
 

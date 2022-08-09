@@ -10,6 +10,7 @@ using Bonsai.Vision.Design;
 [assembly: TypeVisualizer(typeof(ControlMashup<JoystickVisualizer>), Target = typeof(VisualizerMashup<VisualizerGrid, JoystickVisualizer>))]
 [assembly: TypeVisualizer(typeof(ControlMashup<StateVisualizer>), Target = typeof(VisualizerMashup<VisualizerGrid, StateVisualizer>))]
 [assembly: TypeVisualizer(typeof(ControlMashup<ResponseVisualizer>), Target = typeof(VisualizerMashup<VisualizerGrid, ResponseVisualizer>))]
+[assembly: TypeVisualizer(typeof(ControlMashup<TwoAfcVisualizer>), Target = typeof(VisualizerMashup<VisualizerGrid, TwoAfcVisualizer>))]
 [assembly: TypeVisualizer(typeof(ControlMashup<IplImageVisualizer>), Target = typeof(VisualizerMashup<VisualizerGrid, IplImageVisualizer>))]
 
 public class VisualizerGrid : DialogMashupVisualizer
