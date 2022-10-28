@@ -4,9 +4,11 @@ using System.Reactive.Linq;
 using System.Windows.Forms;
 using Bonsai;
 using Bonsai.Design;
+using Bonsai.Design.Visualizers;
 using Bonsai.Vision.Design;
 
 [assembly: TypeVisualizer(typeof(VisualizerGrid), Target = typeof(object))]
+[assembly: TypeVisualizer(typeof(ControlMashup<TimeSeriesVisualizer>), Target = typeof(VisualizerMashup<VisualizerGrid, TimeSeriesVisualizer>))]
 [assembly: TypeVisualizer(typeof(ControlMashup<JoystickVisualizer>), Target = typeof(VisualizerMashup<VisualizerGrid, JoystickVisualizer>))]
 [assembly: TypeVisualizer(typeof(ControlMashup<StateVisualizer>), Target = typeof(VisualizerMashup<VisualizerGrid, StateVisualizer>))]
 [assembly: TypeVisualizer(typeof(ControlMashup<ResponseVisualizer>), Target = typeof(VisualizerMashup<VisualizerGrid, ResponseVisualizer>))]
