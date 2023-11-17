@@ -99,5 +99,5 @@
         }
     },
 
-    "required": ["experimentControl", "itiDuration", "joystickParameters", "responseWindowSettings", "solenoidProperties", "timeoutProperties"]
+    "required": ["experimentControl", "itiDuration", "joystickParameters", "responseWindowSettings", "solenoidProperties", "timeoutProperties", "toneProperties"]
 }

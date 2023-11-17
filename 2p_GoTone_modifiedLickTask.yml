@@ -22,3 +22,8 @@ solenoidProperties:
 timeoutProperties:
   pullTimeout: 0.5
   responseTimeout: 6
+toneProperties:
+  goSound: 10
+  missTone: 50
+  noGoSound: 12
+  rewardTone: 50

@@ -18,19 +18,19 @@ namespace ModifiedGoNoGoTask
     public partial class ModifiedGoNoGoTask
     {
     
-        private ExperimentControl _experimentControl;
+        private ExperimentControl _experimentControl = new ExperimentControl();
     
-        private ItiDuration _itiDuration;
+        private ItiDuration _itiDuration = new ItiDuration();
     
-        private JoystickParameters _joystickParameters;
+        private JoystickParameters _joystickParameters = new JoystickParameters();
     
-        private ResponseWindowSettings _responseWindowSettings;
+        private ResponseWindowSettings _responseWindowSettings = new ResponseWindowSettings();
     
-        private SolenoidProperties _solenoidProperties;
+        private SolenoidProperties _solenoidProperties = new SolenoidProperties();
     
-        private TimeoutProperties _timeoutProperties;
+        private TimeoutProperties _timeoutProperties = new TimeoutProperties();
     
-        private ToneProperties _toneProperties;
+        private ToneProperties _toneProperties = new ToneProperties();
     
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         [YamlDotNet.Serialization.YamlMemberAttribute(Alias="experimentControl")]
@@ -255,7 +255,11 @@ namespace ModifiedGoNoGoTask
     
         private double _upperBoundDuration;
     
+        /// <summary>
+        /// in seconds (s)
+        /// </summary>
         [YamlDotNet.Serialization.YamlMemberAttribute(Alias="lowerBoundDuration")]
+        [System.ComponentModel.DescriptionAttribute("in seconds (s)")]
         public double LowerBoundDuration
         {
             get
@@ -268,7 +272,11 @@ namespace ModifiedGoNoGoTask
             }
         }
     
+        /// <summary>
+        /// in seconds (s)
+        /// </summary>
         [YamlDotNet.Serialization.YamlMemberAttribute(Alias="upperBoundDuration")]
+        [System.ComponentModel.DescriptionAttribute("in seconds (s)")]
         public double UpperBoundDuration
         {
             get
@@ -397,7 +405,11 @@ namespace ModifiedGoNoGoTask
     
         private double _noGoResponseWindow;
     
+        /// <summary>
+        /// in seconds (s)
+        /// </summary>
         [YamlDotNet.Serialization.YamlMemberAttribute(Alias="goResponseWindow")]
+        [System.ComponentModel.DescriptionAttribute("in seconds (s)")]
         public double GoResponseWindow
         {
             get
@@ -410,7 +422,11 @@ namespace ModifiedGoNoGoTask
             }
         }
     
+        /// <summary>
+        /// in seconds (s)
+        /// </summary>
         [YamlDotNet.Serialization.YamlMemberAttribute(Alias="noGoResponseWindow")]
+        [System.ComponentModel.DescriptionAttribute("in seconds (s)")]
         public double NoGoResponseWindow
         {
             get
@@ -442,7 +458,11 @@ namespace ModifiedGoNoGoTask
     
         private double _pulsePeriod;
     
+        /// <summary>
+        /// in milliseconds (ms)
+        /// </summary>
         [YamlDotNet.Serialization.YamlMemberAttribute(Alias="pulsePeriod")]
+        [System.ComponentModel.DescriptionAttribute("in milliseconds (ms)")]
         public double PulsePeriod
         {
             get
@@ -475,7 +495,11 @@ namespace ModifiedGoNoGoTask
     
         private double _responseTimeout;
     
+        /// <summary>
+        /// in seconds (s)
+        /// </summary>
         [YamlDotNet.Serialization.YamlMemberAttribute(Alias="pullTimeout")]
+        [System.ComponentModel.DescriptionAttribute("in seconds (s)")]
         public double PullTimeout
         {
             get
@@ -488,7 +512,11 @@ namespace ModifiedGoNoGoTask
             }
         }
     
+        /// <summary>
+        /// in seconds (s)
+        /// </summary>
         [YamlDotNet.Serialization.YamlMemberAttribute(Alias="responseTimeout")]
+        [System.ComponentModel.DescriptionAttribute("in seconds (s)")]
         public double ResponseTimeout
         {
             get
@@ -565,7 +593,7 @@ namespace ModifiedGoNoGoTask
             }
         }
     
-        [YamlDotNet.Serialization.YamlMemberAttribute(Alias="RewardTone")]
+        [YamlDotNet.Serialization.YamlMemberAttribute(Alias="rewardTone")]
         public int RewardTone
         {
             get
