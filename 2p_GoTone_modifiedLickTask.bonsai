@@ -24,11 +24,9 @@
       </Expression>
       <Expression xsi:type="PropertyMapping">
         <PropertyMappings>
-          <Property Name="Behavior COMPort" Selector="ExperimentControl.BehaviorCOMPort" />
           <Property Name="NumberOfTrials" Selector="ExperimentControl.NumberOfTrials" />
           <Property Name="ResponseType" Selector="ExperimentControl.ResponseType" />
           <Property Name="Percentage Go Trials" Selector="ExperimentControl.PercentageGoTrials" />
-          <Property Name="Soundcard COMPort" Selector="ExperimentControl.SoundcardCOMPort" />
           <Property Name="Lower Bound ITI Duration " Selector="ItiDuration.LowerBoundDuration" />
           <Property Name="Upper Bound ITI Duration" Selector="ItiDuration.UpperBoundDuration" />
           <Property Name="ITI Lower Threshold" Selector="JoystickParameters.ItiLowerThreshold" />
@@ -301,7 +299,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
-                      <rx:DueTime>PT0.531S</rx:DueTime>
+                      <rx:DueTime>PT0.502S</rx:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Disable">
@@ -411,7 +409,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Throttle">
-                            <rx:DueTime>PT2.703S</rx:DueTime>
+                            <rx:DueTime>PT2.845S</rx:DueTime>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="Combinator">
@@ -1453,7 +1451,7 @@
               <Name>ResponseStatistics</Name>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-10-27T09-17-33/ResponseStat.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-17T10-00-55/ResponseStat.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1494,9 +1492,9 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateTransition">
-                <p1:Trial>3</p1:Trial>
-                <p1:Id>ITI</p1:Id>
-                <p1:ElapsedTime>5431472.828032</p1:ElapsedTime>
+                <p1:Trial>0</p1:Trial>
+                <p1:Id>Response</p1:Id>
+                <p1:ElapsedTime>7252106.609024</p1:ElapsedTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -1525,7 +1523,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-10-27T09-17-33/GoTone_StateTransitions.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-17T10-00-55/GoTone_StateTransitions.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1585,7 +1583,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-10-27T09-17-33/sounds.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-17T10-00-55/sounds.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1769,7 +1767,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-10-27T09-17-33/Joystick.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-17T10-00-55/Joystick.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -1895,7 +1893,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-10-27T09-17-33/soundcard.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-17T10-00-55/soundcard.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -2512,7 +2510,7 @@ Item5 as NoGoToneTick)</scr:Expression>
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-10-27T09-17-33/JoystickTrace.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-17T10-00-55/JoystickTrace.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2688,7 +2686,7 @@ Item2 as Metadata)</scr:Expression>
         <Combinator xsi:type="rx:CombineLatest" />
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-10-27T09-17-33/LickTrace.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-17T10-00-55/LickTrace.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2737,7 +2735,7 @@ Item2 as Metadata)</scr:Expression>
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-10-27T09-17-33/VideoTimestamps.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-17T10-00-55/VideoTimestamps.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2757,7 +2755,7 @@ Item2 as Metadata)</scr:Expression>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-10-27T09-17-33\SP001_LickTask_2023-10-27T09-17-33.avi</cv:FileName>
+          <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-17T10-00-55\SP001_LickTask_2023-11-17T10-00-55.avi</cv:FileName>
           <cv:Suffix>None</cv:Suffix>
           <cv:Buffered>true</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -2784,8 +2782,30 @@ Item2 as Metadata)</scr:Expression>
       <Expression xsi:type="p4:DeserializeFromYaml">
         <p4:Type xsi:type="TypeMappingOfModifiedGoNoGoTask" />
       </Expression>
-      <Expression xsi:type="AsyncSubject">
+      <Expression xsi:type="BehaviorSubject">
         <Name>TaskParameters</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>TaskParameters</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p4:SerializeToYaml" />
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Path</Name>
+      </Expression>
+      <Expression xsi:type="Add">
+        <Operand xsi:type="StringProperty">
+          <Value>/TaskParameters.yml</Value>
+        </Operand>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="Path" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:WriteAllText" />
       </Expression>
     </Nodes>
     <Edges>
@@ -2838,6 +2858,11 @@ Item2 as Metadata)</scr:Expression>
       <Edge From="57" To="58" Label="Source1" />
       <Edge From="59" To="60" Label="Source1" />
       <Edge From="60" To="61" Label="Source1" />
+      <Edge From="62" To="63" Label="Source1" />
+      <Edge From="63" To="67" Label="Source1" />
+      <Edge From="64" To="65" Label="Source1" />
+      <Edge From="65" To="66" Label="Source1" />
+      <Edge From="66" To="67" Label="Source2" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
