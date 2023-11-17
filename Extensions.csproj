@@ -12,6 +12,7 @@
     <PackageReference Include="Bonsai.Vision.Design" Version="2.5.2" />
     <PackageReference Include="ZedGraph" Version="5.1.7" />
     <PackageReference Include="Rx-Linq" Version="2.2.5" />
+    <PackageReference Include="YamlDotNet" Version="12.0.2" />
   </ItemGroup>
 
 </Project>

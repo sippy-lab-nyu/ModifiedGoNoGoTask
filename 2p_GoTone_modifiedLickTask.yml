@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=2p_GoTone_modifiedLickTask.json
+experimentControl:
+  behaviorCOMPort: COM3
+  numberOfTrials: 200
+  percentageGoTrials: 100
+  responseType: true
+  soundcardCOMPort: COM4
+itiDuration:
+  lowerBoundDuration: 0.5
+  upperBoundDuration: 1
+joystickParameters:
+  itiLowerThreshold: -0.02
+  itiUpperThreshold: 0.02
+  joystickThreshold: 0.02
+  noGoThreshold: 0.02
+  pullThreshold: -0.02
+responseWindowSettings:
+  goResponseWindow: 6
+  noGoResponseWindow: 2
+solenoidProperties:
+  pulsePeriod: 60
+timeoutProperties:
+  pullTimeout: 0.5
+  responseTimeout: 6

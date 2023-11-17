@@ -1,0 +1,103 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$id": "https://github.com/sippy-lab-nyu/ModifiedGoNoGoTask",
+    "description": "Represents task parameters used in the modified go-nogo task.",
+    "title": "ModifiedGoNoGoTask",
+    "type": "object",
+    "properties": {
+        "experimentControl": {
+            "type": "object",
+            "properties": {
+                "behaviorCOMPort": {
+                    "type": "string",
+                    "description": "The name of the serial port used to communicate with the Harp device."
+                },
+                "numberOfTrials": {
+                    "type": "integer"
+                },
+                "percentageGoTrials": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "responseType": {
+                    "type": "boolean"
+                },
+                "soundcardCOMPort": {
+                    "type": "string"
+                }
+            },
+            "required": ["behaviorCOMPort", "numberOfTrials", "percentageGoTrials", "responseType", "soundcardCOMPort"]
+        },
+
+        "itiDuration": {
+            "type": "object",
+            "properties": {
+                "lowerBoundDuration": {
+                    "type": "number",
+                    "description": "in seconds (s)"
+                },
+                "upperBoundDuration": {
+                    "type": "number",
+                    "description": "in seconds (s)"
+                }
+            },
+            "required": ["lowerBoundDuration", "upperBoundDuration"]
+        },
+
+        "joystickParameters": {
+            "type": "object",
+            "properties": {
+                "itiLowerThreshold": { "type": "number" },
+                "itiUpperThreshold": { "type": "number" },
+                "joystickThreshold": { "type": "number" },
+                "noGoThreshold": { "type": "number" },
+                "pullThreshold": { "type": "number" }
+            },
+            "required": ["itiLowerThreshold", "itiUpperThreshold", "joystickThreshold", "noGoThreshold", "pullThreshold"]
+        },
+
+        "responseWindowSettings": {
+            "type": "object",
+            "properties": {
+                "goResponseWindow": { "type": "number", "description": "in seconds (s)" },
+                "noGoResponseWindow": { "type": "number", "description": "in seconds (s)" }
+            },
+            "required": ["goResponseWindow", "noGoResponseWindow"]
+        },
+
+        "solenoidProperties": {
+            "type": "object",
+            "properties": {
+                "pulsePeriod":
+                {
+                    "type": "number",
+                    "description": "in milliseconds (ms)"
+                }
+            },
+            "required": ["pulsePeriod"]
+        },
+
+        "timeoutProperties": {
+            "type": "object",
+            "properties": {
+                "pullTimeout": { "type": "number", "description": "in seconds (s)" },
+                "responseTimeout": { "type": "number", "description": "in seconds (s)" }
+            },
+            "required": ["pullTimeout", "responseTimeout"]
+        },
+
+        "toneProperties": {
+            "type": "object",
+            "properties": {
+                "goSound": { "type": "integer" },
+                "missTone": { "type": "integer" },
+                "noGoSound": { "type": "integer" },
+                "rewardTone": { "type": "integer" }
+            },
+            "required": ["goSound", "missTone", "noGoSound", "rewardTone"]
+        }
+    },
+
+    "required": ["experimentControl", "itiDuration", "joystickParameters", "responseWindowSettings", "solenoidProperties", "timeoutProperties"]
+}
