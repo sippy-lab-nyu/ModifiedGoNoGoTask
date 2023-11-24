@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.3"
+<WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:p1="clr-namespace:;assembly=Extensions"
@@ -12,7 +12,7 @@
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:vid="clr-namespace:Bonsai.Video;assembly=Bonsai.Video"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
-                 xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
+                 xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -30,7 +30,7 @@
                 <Combinator xsi:type="rx:IgnoreElements" />
               </Builder>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>Trial</Name>
             </Expression>
             <Expression xsi:type="PropertySource" TypeArguments="p1:StateTransition,p1:StateId">
@@ -40,7 +40,7 @@
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:IgnoreElements" />
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>State</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -58,8 +58,8 @@
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateTransition">
                 <p1:Trial>-1</p1:Trial>
-                <p1:Id>Miss</p1:Id>
-                <p1:ElapsedTime>2410710.228032</p1:ElapsedTime>
+                <p1:Id>Blink</p1:Id>
+                <p1:ElapsedTime>7611315.874432</p1:ElapsedTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -68,7 +68,7 @@
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateStatistics" />
             </Expression>
-            <Expression xsi:type="PublishSubject">
+            <Expression xsi:type="rx:PublishSubject">
               <Name>TrialStatistics</Name>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -88,7 +88,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-09-22T10-12-45/StateTransitions.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-11-21T13-45-36/StateTransitions.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -105,14 +105,14 @@
                 <p2:Upper>1</p2:Upper>
               </Combinator>
             </Expression>
-            <Expression xsi:type="AsyncSubject">
+            <Expression xsi:type="rx:AsyncSubject">
               <Name>TrialDistribution</Name>
             </Expression>
             <Expression xsi:type="PropertySource" TypeArguments="p1:TrialResponse,p1:ResponseId">
               <MemberName>Result</MemberName>
               <Value>Hit</Value>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>PreviousResponse</Name>
             </Expression>
             <Expression xsi:type="ExternalizedMapping">
@@ -134,7 +134,7 @@
               <Format>{0}\{1:yyyy-MM-ddTHH-mm-ss}</Format>
               <Selector>Value,Timestamp</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>Path</Name>
             </Expression>
             <Expression xsi:type="PropertySource" TypeArguments="p1:StateTransition,p1:StateId">
@@ -144,7 +144,7 @@
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:IgnoreElements" />
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>Annotation</Name>
             </Expression>
             <Expression xsi:type="ExternalizedMapping">
@@ -159,6 +159,68 @@
                       <Name>Commands</Name>
                     </Builder>
                   </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="PortName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="harp:Device">
+                      <harp:OperationMode>Active</harp:OperationMode>
+                      <harp:OperationLed>On</harp:OperationLed>
+                      <harp:DumpRegisters>true</harp:DumpRegisters>
+                      <harp:VisualIndicators>On</harp:VisualIndicators>
+                      <harp:Heartbeat>Disabled</harp:Heartbeat>
+                      <harp:IgnoreErrors>false</harp:IgnoreErrors>
+                      <harp:PortName>COM3</harp:PortName>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="harp:Parse">
+                    <harp:Register xsi:type="harp:ParseMessagePayload">
+                      <harp:PayloadType>Timestamp</harp:PayloadType>
+                      <harp:IsArray>false</harp:IsArray>
+                    </harp:Register>
+                  </Expression>
+                  <Expression xsi:type="rx:PublishSubject">
+                    <Name>Timestamp</Name>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="p3:BehaviorEvent">
+                      <p3:Type>QuadratureCounter</p3:Type>
+                      <p3:Mask>Port2</p3:Mask>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="rx:PublishSubject">
+                      <Name>Joystick</Name>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="p3:BehaviorEvent">
+                    <p3:Type>RegisterInputs</p3:Type>
+                    <p3:Mask>Port1</p3:Mask>
+                  </Expression>
+                  <Expression xsi:type="rx:PublishSubject">
+                    <Name>Touch</Name>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="p3:BehaviorEvent">
+                      <p3:Type>Input</p3:Type>
+                      <p3:Mask>Poke1InfraRedBeam</p3:Mask>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="rx:PublishSubject">
+                      <Name>Reward</Name>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="p3:BehaviorEvent">
+                    <p3:Type>RegisterInputs</p3:Type>
+                    <p3:Mask>Port1</p3:Mask>
+                  </Expression>
+                  <Expression xsi:type="rx:PublishSubject">
+                    <Name>StartTrigger</Name>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>MessageBytes</Selector>
+                  </Expression>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>Path</Name>
                   </Expression>
@@ -172,69 +234,9 @@
                       <Property Name="Path" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="PortName" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="harp:Device">
-                      <harp:DeviceState>Active</harp:DeviceState>
-                      <harp:DumpRegisters>true</harp:DumpRegisters>
-                      <harp:LedState>On</harp:LedState>
-                      <harp:VisualIndicators>On</harp:VisualIndicators>
-                      <harp:Heartbeat>Disable</harp:Heartbeat>
-                      <harp:IgnoreErrors>false</harp:IgnoreErrors>
-                      <harp:PortName>COM3</harp:PortName>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="harp:Parse">
-                    <harp:Type>Timestamp</harp:Type>
-                    <harp:IsArray>false</harp:IsArray>
-                  </Expression>
-                  <Expression xsi:type="PublishSubject">
-                    <Name>Timestamp</Name>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="p3:BehaviorEvent">
-                      <p3:Type>QuadratureCounter</p3:Type>
-                      <p3:Mask>Port2</p3:Mask>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="PublishSubject">
-                      <Name>Joystick</Name>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="p3:BehaviorEvent">
-                    <p3:Type>RegisterInputs</p3:Type>
-                    <p3:Mask>Port1</p3:Mask>
-                  </Expression>
-                  <Expression xsi:type="PublishSubject">
-                    <Name>Touch</Name>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="p3:BehaviorEvent">
-                      <p3:Type>Input</p3:Type>
-                      <p3:Mask>Poke1InfraRedBeam</p3:Mask>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="PublishSubject">
-                      <Name>Reward</Name>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="p3:BehaviorEvent">
-                    <p3:Type>RegisterInputs</p3:Type>
-                    <p3:Mask>Port1</p3:Mask>
-                  </Expression>
-                  <Expression xsi:type="PublishSubject">
-                    <Name>StartTrigger</Name>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>MessageBytes</Selector>
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-09-22T10-12-45/Joystick.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-11-21T13-45-36/Joystick.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -251,7 +253,7 @@
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:IgnoreElements" />
                   </Expression>
-                  <Expression xsi:type="BehaviorSubject">
+                  <Expression xsi:type="rx:BehaviorSubject">
                     <Name>Commands</Name>
                   </Expression>
                   <Expression xsi:type="Disable">
@@ -277,7 +279,7 @@
                     </Builder>
                   </Expression>
                   <Expression xsi:type="Disable">
-                    <Builder xsi:type="Condition">
+                    <Builder xsi:type="rx:Condition">
                       <Name>TouchDetect</Name>
                       <Workflow>
                         <Nodes>
@@ -298,29 +300,29 @@
                     </Builder>
                   </Expression>
                   <Expression xsi:type="Disable">
-                    <Builder xsi:type="PublishSubject">
+                    <Builder xsi:type="rx:PublishSubject">
                       <Name>Lick</Name>
                     </Builder>
                   </Expression>
                 </Nodes>
                 <Edges>
-                  <Edge From="0" To="5" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
+                  <Edge From="0" To="2" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="17" Label="Source2" />
-                  <Edge From="4" To="5" Label="Source2" />
+                  <Edge From="2" To="5" Label="Source1" />
+                  <Edge From="2" To="7" Label="Source1" />
+                  <Edge From="2" To="9" Label="Source1" />
+                  <Edge From="2" To="11" Label="Source1" />
+                  <Edge From="2" To="13" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source1" />
                   <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="5" To="8" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
-                  <Edge From="5" To="12" Label="Source1" />
-                  <Edge From="5" To="14" Label="Source1" />
-                  <Edge From="5" To="16" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="9" To="10" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source1" />
+                  <Edge From="13" To="17" Label="Source1" />
                   <Edge From="14" To="15" Label="Source1" />
-                  <Edge From="16" To="17" Label="Source1" />
+                  <Edge From="15" To="16" Label="Source1" />
+                  <Edge From="16" To="17" Label="Source2" />
                   <Edge From="18" To="19" Label="Source1" />
                   <Edge From="19" To="20" Label="Source1" />
                   <Edge From="21" To="22" Label="Source1" />
@@ -331,6 +333,11 @@
                   <Edge From="26" To="27" Label="Source1" />
                 </Edges>
               </Workflow>
+            </Expression>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="SubscribeSubject">
+                <Name>Timestamp</Name>
+              </Builder>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="vid:VideoCaptureDevice">
@@ -361,18 +368,10 @@
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\WithLatestTimestamp.bonsai">
               <Name>Timestamp</Name>
             </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>Path</Name>
-            </Expression>
-            <Expression xsi:type="Add">
-              <Operand xsi:type="StringProperty">
-                <Value>\JK38_pre_BV.avi</Value>
-              </Operand>
-            </Expression>
-            <Expression xsi:type="PropertyMapping">
-              <PropertyMappings>
-                <Property Name="FileName" />
-              </PropertyMappings>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="Combinator">
+                <Combinator xsi:type="rx:CombineLatest" />
+              </Builder>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>Path</Name>
@@ -387,26 +386,29 @@
                 <Property Name="FileName" />
               </PropertyMappings>
             </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="SubscribeSubject">
-                <Name>Timestamp</Name>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="Combinator">
-                <Combinator xsi:type="rx:CombineLatest" />
-              </Builder>
-            </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-09-22T10-12-45/VideoTimestamps.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-11-21T13-45-36/VideoTimestamps.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
               <io:IncludeHeader>false</io:IncludeHeader>
             </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Path</Name>
+            </Expression>
+            <Expression xsi:type="Add">
+              <Operand xsi:type="StringProperty">
+                <Value>\JK38_pre_BV.avi</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="FileName" />
+              </PropertyMappings>
+            </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="cv:VideoWriter">
-                <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-09-22T10-12-45\JK38_pre_BV.avi</cv:FileName>
+                <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-11-21T13-45-36\JK38_pre_BV.avi</cv:FileName>
                 <cv:Suffix>Timestamp</cv:Suffix>
                 <cv:Buffered>true</cv:Buffered>
                 <cv:Overwrite>false</cv:Overwrite>
@@ -423,8 +425,10 @@
               <Name>Sounds</Name>
             </Expression>
             <Expression xsi:type="harp:Parse">
-              <harp:Type>U16</harp:Type>
-              <harp:IsArray>false</harp:IsArray>
+              <harp:Register xsi:type="harp:ParseMessagePayload">
+                <harp:PayloadType>U16</harp:PayloadType>
+                <harp:IsArray>false</harp:IsArray>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>Path</Name>
@@ -440,7 +444,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-09-22T10-12-45/sounds.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-11-21T13-45-36/sounds.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -456,6 +460,23 @@
                   <Expression xsi:type="SubscribeSubject">
                     <Name>Sounds</Name>
                   </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="PortName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="harp:Device">
+                      <harp:OperationMode>Active</harp:OperationMode>
+                      <harp:OperationLed>On</harp:OperationLed>
+                      <harp:DumpRegisters>true</harp:DumpRegisters>
+                      <harp:VisualIndicators>On</harp:VisualIndicators>
+                      <harp:Heartbeat>Disabled</harp:Heartbeat>
+                      <harp:IgnoreErrors>false</harp:IgnoreErrors>
+                      <harp:PortName>COM4</harp:PortName>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>MessageBytes</Selector>
+                  </Expression>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>Path</Name>
                   </Expression>
@@ -469,26 +490,9 @@
                       <Property Name="Path" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="PortName" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="harp:Device">
-                      <harp:DeviceState>Active</harp:DeviceState>
-                      <harp:DumpRegisters>true</harp:DumpRegisters>
-                      <harp:LedState>On</harp:LedState>
-                      <harp:VisualIndicators>On</harp:VisualIndicators>
-                      <harp:Heartbeat>Disable</harp:Heartbeat>
-                      <harp:IgnoreErrors>false</harp:IgnoreErrors>
-                      <harp:PortName>COM4</harp:PortName>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>MessageBytes</Selector>
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-09-22T10-12-45/soundcard.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-11-21T13-45-36/soundcard.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -505,18 +509,18 @@
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:IgnoreElements" />
                   </Expression>
-                  <Expression xsi:type="BehaviorSubject">
+                  <Expression xsi:type="rx:BehaviorSubject">
                     <Name>Sounds</Name>
                   </Expression>
                 </Nodes>
                 <Edges>
-                  <Edge From="0" To="5" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
+                  <Edge From="0" To="2" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="7" Label="Source2" />
-                  <Edge From="4" To="5" Label="Source2" />
+                  <Edge From="3" To="7" Label="Source1" />
+                  <Edge From="4" To="5" Label="Source1" />
                   <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source1" />
+                  <Edge From="6" To="7" Label="Source2" />
                   <Edge From="8" To="9" Label="Source1" />
                   <Edge From="9" To="10" Label="Source1" />
                 </Edges>
@@ -531,6 +535,78 @@
                 <Nodes>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>Commands2</Name>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="PortName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="harp:Device">
+                      <harp:OperationMode>Active</harp:OperationMode>
+                      <harp:OperationLed>On</harp:OperationLed>
+                      <harp:DumpRegisters>true</harp:DumpRegisters>
+                      <harp:VisualIndicators>On</harp:VisualIndicators>
+                      <harp:Heartbeat>Disabled</harp:Heartbeat>
+                      <harp:IgnoreErrors>false</harp:IgnoreErrors>
+                      <harp:PortName>COM5</harp:PortName>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="harp:Parse">
+                    <harp:Register xsi:type="harp:ParseMessagePayload">
+                      <harp:PayloadType>Timestamp</harp:PayloadType>
+                      <harp:IsArray>false</harp:IsArray>
+                    </harp:Register>
+                  </Expression>
+                  <Expression xsi:type="rx:PublishSubject">
+                    <Name>Timestamp2</Name>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="p3:BehaviorEvent">
+                      <p3:Type>QuadratureCounter</p3:Type>
+                      <p3:Mask>Port2</p3:Mask>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="rx:PublishSubject">
+                      <Name>Joystick</Name>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="p3:BehaviorEvent">
+                      <p3:Type>AnalogInput</p3:Type>
+                      <p3:Mask>Port1</p3:Mask>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="rx:PublishSubject">
+                      <Name>Touch</Name>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="p3:BehaviorEvent">
+                      <p3:Type>Input</p3:Type>
+                      <p3:Mask>Poke1InfraRedBeam</p3:Mask>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="rx:PublishSubject">
+                      <Name>Reward</Name>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="p3:BehaviorEvent">
+                      <p3:Type>RegisterInputs</p3:Type>
+                      <p3:Mask>Port1</p3:Mask>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="rx:PublishSubject">
+                      <Name>StartTrigger</Name>
+                    </Builder>
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="MemberSelector">
+                      <Selector>MessageBytes</Selector>
+                    </Builder>
                   </Expression>
                   <Expression xsi:type="Disable">
                     <Builder xsi:type="SubscribeSubject">
@@ -549,76 +625,6 @@
                       <PropertyMappings>
                         <Property Name="Path" />
                       </PropertyMappings>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="PortName" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="harp:Device">
-                      <harp:DeviceState>Active</harp:DeviceState>
-                      <harp:DumpRegisters>true</harp:DumpRegisters>
-                      <harp:LedState>On</harp:LedState>
-                      <harp:VisualIndicators>On</harp:VisualIndicators>
-                      <harp:Heartbeat>Disable</harp:Heartbeat>
-                      <harp:IgnoreErrors>false</harp:IgnoreErrors>
-                      <harp:PortName>COM5</harp:PortName>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="harp:Parse">
-                    <harp:Type>Timestamp</harp:Type>
-                    <harp:IsArray>false</harp:IsArray>
-                  </Expression>
-                  <Expression xsi:type="PublishSubject">
-                    <Name>Timestamp2</Name>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="p3:BehaviorEvent">
-                      <p3:Type>QuadratureCounter</p3:Type>
-                      <p3:Mask>Port2</p3:Mask>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="PublishSubject">
-                      <Name>Joystick</Name>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="p3:BehaviorEvent">
-                      <p3:Type>AnalogInput</p3:Type>
-                      <p3:Mask>Port1</p3:Mask>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="PublishSubject">
-                      <Name>Touch</Name>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="p3:BehaviorEvent">
-                      <p3:Type>Input</p3:Type>
-                      <p3:Mask>Poke1InfraRedBeam</p3:Mask>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="PublishSubject">
-                      <Name>Reward</Name>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="p3:BehaviorEvent">
-                      <p3:Type>RegisterInputs</p3:Type>
-                      <p3:Mask>Port1</p3:Mask>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="PublishSubject">
-                      <Name>StartTrigger</Name>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="MemberSelector">
-                      <Selector>MessageBytes</Selector>
                     </Builder>
                   </Expression>
                   <Expression xsi:type="Disable">
@@ -642,7 +648,7 @@
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:IgnoreElements" />
                   </Expression>
-                  <Expression xsi:type="BehaviorSubject">
+                  <Expression xsi:type="rx:BehaviorSubject">
                     <Name>Commands2</Name>
                   </Expression>
                   <Expression xsi:type="Disable">
@@ -668,7 +674,7 @@
                     </Builder>
                   </Expression>
                   <Expression xsi:type="Disable">
-                    <Builder xsi:type="Condition">
+                    <Builder xsi:type="rx:Condition">
                       <Name>TouchDetect</Name>
                       <Workflow>
                         <Nodes>
@@ -689,29 +695,29 @@
                     </Builder>
                   </Expression>
                   <Expression xsi:type="Disable">
-                    <Builder xsi:type="PublishSubject">
+                    <Builder xsi:type="rx:PublishSubject">
                       <Name>Lick</Name>
                     </Builder>
                   </Expression>
                 </Nodes>
                 <Edges>
-                  <Edge From="0" To="5" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
+                  <Edge From="0" To="2" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="17" Label="Source2" />
-                  <Edge From="4" To="5" Label="Source2" />
+                  <Edge From="2" To="5" Label="Source1" />
+                  <Edge From="2" To="7" Label="Source1" />
+                  <Edge From="2" To="9" Label="Source1" />
+                  <Edge From="2" To="11" Label="Source1" />
+                  <Edge From="2" To="13" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source1" />
                   <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="5" To="8" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
-                  <Edge From="5" To="12" Label="Source1" />
-                  <Edge From="5" To="14" Label="Source1" />
-                  <Edge From="5" To="16" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="9" To="10" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source1" />
+                  <Edge From="13" To="17" Label="Source1" />
                   <Edge From="14" To="15" Label="Source1" />
-                  <Edge From="16" To="17" Label="Source1" />
+                  <Edge From="15" To="16" Label="Source1" />
+                  <Edge From="16" To="17" Label="Source2" />
                   <Edge From="18" To="19" Label="Source1" />
                   <Edge From="19" To="20" Label="Source1" />
                   <Edge From="21" To="22" Label="Source1" />
@@ -722,6 +728,23 @@
                   <Edge From="26" To="27" Label="Source1" />
                 </Edges>
               </Workflow>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="p2:CreateContinuousUniform">
+                <p2:Lower>5</p2:Lower>
+                <p2:Upper>5</p2:Upper>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="p2:Sample" />
+            </Expression>
+            <Expression xsi:type="scr:ExpressionTransform">
+              <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="DueTime" />
+              </PropertyMappings>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p2:CreateDiscreteUniform">
@@ -735,7 +758,7 @@
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Timestamp" />
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>SoundOnly</Name>
               <Workflow>
                 <Nodes>
@@ -766,12 +789,12 @@
               <Id>Miss</Id>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\PlaySound.bonsai">
-              <SoundIndex>16</SoundIndex>
+              <SoundIndex>21</SoundIndex>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>Commands</Name>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>AirPuffOnly</Name>
               <Workflow>
                 <Nodes>
@@ -800,23 +823,6 @@
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
               <Id>Joystick</Id>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p2:CreateContinuousUniform">
-                <p2:Lower>5</p2:Lower>
-                <p2:Upper>5</p2:Upper>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p2:Sample" />
-            </Expression>
-            <Expression xsi:type="scr:ExpressionTransform">
-              <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
-            </Expression>
-            <Expression xsi:type="PropertyMapping">
-              <PropertyMappings>
-                <Property Name="DueTime" />
-              </PropertyMappings>
             </Expression>
             <Expression xsi:type="ExternalizedMapping">
               <Property Name="Puff Period(ms)" />
@@ -863,7 +869,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>SoundAndAirPuff</Name>
               <Workflow>
                 <Nodes>
@@ -897,7 +903,7 @@
               <Id>Miss</Id>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\PlaySound.bonsai">
-              <SoundIndex>16</SoundIndex>
+              <SoundIndex>21</SoundIndex>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>Commands</Name>
@@ -944,7 +950,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>LightOnly</Name>
               <Workflow>
                 <Nodes>
@@ -981,7 +987,7 @@
             <Expression xsi:type="MulticastSubject">
               <Name>Commands2</Name>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>LightAndSound</Name>
               <Workflow>
                 <Nodes>
@@ -1022,12 +1028,12 @@
               <Name>Commands2</Name>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\PlaySound.bonsai">
-              <SoundIndex>16</SoundIndex>
+              <SoundIndex>21</SoundIndex>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>Commands</Name>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>LightAndAirPuffAndSound</Name>
               <Workflow>
                 <Nodes>
@@ -1071,7 +1077,7 @@
               <Name>Commands2</Name>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\PlaySound.bonsai">
-              <SoundIndex>16</SoundIndex>
+              <SoundIndex>21</SoundIndex>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>Commands</Name>
@@ -1118,7 +1124,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>LightAndAirPuff</Name>
               <Workflow>
                 <Nodes>
@@ -1237,7 +1243,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-09-22T10-12-45/AnalogTrace.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData\SoundPuffLightExperimentMultiSensorySLP\2023-11-21T13-45-36/AnalogTrace.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1271,17 +1277,17 @@
             <Edge From="29" To="30" Label="Source1" />
             <Edge From="30" To="31" Label="Source1" />
             <Edge From="32" To="33" Label="Source1" />
-            <Edge From="34" To="35" Label="Source1" />
-            <Edge From="34" To="45" Label="Source2" />
-            <Edge From="35" To="43" Label="Source2" />
-            <Edge From="36" To="37" Label="Source1" />
-            <Edge From="37" To="38" Label="Source1" />
-            <Edge From="38" To="45" Label="Source1" />
+            <Edge From="34" To="37" Label="Source1" />
+            <Edge From="35" To="36" Label="Source1" />
+            <Edge From="35" To="45" Label="Source2" />
+            <Edge From="36" To="37" Label="Source2" />
+            <Edge From="37" To="41" Label="Source1" />
+            <Edge From="38" To="39" Label="Source1" />
             <Edge From="39" To="40" Label="Source1" />
-            <Edge From="40" To="41" Label="Source1" />
-            <Edge From="41" To="44" Label="Source2" />
+            <Edge From="40" To="41" Label="Source2" />
             <Edge From="42" To="43" Label="Source1" />
             <Edge From="43" To="44" Label="Source1" />
+            <Edge From="44" To="45" Label="Source1" />
             <Edge From="46" To="47" Label="Source1" />
             <Edge From="47" To="51" Label="Source1" />
             <Edge From="48" To="49" Label="Source1" />
@@ -1292,24 +1298,24 @@
             <Edge From="56" To="57" Label="Source1" />
             <Edge From="57" To="58" Label="Source1" />
             <Edge From="58" To="59" Label="Source1" />
-            <Edge From="58" To="64" Label="Source1" />
-            <Edge From="58" To="73" Label="Source1" />
-            <Edge From="58" To="80" Label="Source1" />
-            <Edge From="58" To="85" Label="Source1" />
-            <Edge From="58" To="93" Label="Source1" />
-            <Edge From="58" To="103" Label="Source1" />
-            <Edge From="59" To="60" Label="Source1" />
+            <Edge From="59" To="111" Label="Source1" />
             <Edge From="60" To="61" Label="Source1" />
             <Edge From="61" To="62" Label="Source1" />
             <Edge From="62" To="63" Label="Source1" />
-            <Edge From="63" To="110" Label="Source1" />
+            <Edge From="62" To="68" Label="Source1" />
+            <Edge From="62" To="73" Label="Source1" />
+            <Edge From="62" To="80" Label="Source1" />
+            <Edge From="62" To="85" Label="Source1" />
+            <Edge From="62" To="93" Label="Source1" />
+            <Edge From="62" To="103" Label="Source1" />
+            <Edge From="63" To="64" Label="Source1" />
             <Edge From="64" To="65" Label="Source1" />
             <Edge From="65" To="66" Label="Source1" />
-            <Edge From="66" To="72" Label="Source1" />
-            <Edge From="67" To="68" Label="Source1" />
+            <Edge From="66" To="67" Label="Source1" />
+            <Edge From="67" To="110" Label="Source1" />
             <Edge From="68" To="69" Label="Source1" />
             <Edge From="69" To="70" Label="Source1" />
-            <Edge From="70" To="111" Label="Source1" />
+            <Edge From="70" To="72" Label="Source1" />
             <Edge From="71" To="72" Label="Source2" />
             <Edge From="71" To="79" Label="Source2" />
             <Edge From="71" To="102" Label="Source2" />
