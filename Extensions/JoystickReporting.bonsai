@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.5.0"
+<WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                 xmlns:p1="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
+                 xmlns:num="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
-                 xmlns:p2="clr-namespace:;assembly=Extensions"
+                 xmlns:p1="clr-namespace:;assembly=Extensions"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -12,7 +12,7 @@
         <Name>Joystick</Name>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p1:Abs" />
+        <Combinator xsi:type="num:Abs" />
       </Expression>
       <Expression xsi:type="GreaterThan">
         <Operand xsi:type="DoubleProperty">
@@ -22,7 +22,7 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:DistinctUntilChanged" />
       </Expression>
-      <Expression xsi:type="Condition">
+      <Expression xsi:type="rx:Condition">
         <Name>Movement</Name>
         <Workflow>
           <Nodes>
@@ -36,14 +36,14 @@
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="PropertySource" TypeArguments="p2:StateTransition,p2:StateId">
+      <Expression xsi:type="PropertySource" TypeArguments="p1:StateTransition,p1:StateId">
         <MemberName>Id</MemberName>
         <Value>Joystick</Value>
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="Bonsai.Harp:WithLatestTimestamp.bonsai">
         <Name>Timestamp</Name>
       </Expression>
-      <Expression xsi:type="PublishSubject">
+      <Expression xsi:type="rx:PublishSubject">
         <Name>Threshold</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -62,7 +62,7 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:DistinctUntilChanged" />
       </Expression>
-      <Expression xsi:type="Condition">
+      <Expression xsi:type="rx:Condition">
         <Name>Movement</Name>
         <Workflow>
           <Nodes>
@@ -76,14 +76,14 @@
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="PropertySource" TypeArguments="p2:StateTransition,p2:StateId">
+      <Expression xsi:type="PropertySource" TypeArguments="p1:StateTransition,p1:StateId">
         <MemberName>Id</MemberName>
         <Value>Joystick</Value>
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="Bonsai.Harp:WithLatestTimestamp.bonsai">
         <Name>Timestamp</Name>
       </Expression>
-      <Expression xsi:type="PublishSubject">
+      <Expression xsi:type="rx:PublishSubject">
         <Name>NoGoThreshold</Name>
       </Expression>
     </Nodes>

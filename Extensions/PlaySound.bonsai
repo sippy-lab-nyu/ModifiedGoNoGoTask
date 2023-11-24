@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.4.1"
+<WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                 xmlns:p1="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
+                 xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -17,11 +17,11 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p1:CreateHarpMessage">
-          <p1:MessageType>Write</p1:MessageType>
-          <p1:Address>32</p1:Address>
-          <p1:PayloadType>U16</p1:PayloadType>
-          <p1:Payload>0</p1:Payload>
+        <Combinator xsi:type="harp:CreateHarpMessage">
+          <harp:MessageType>Write</harp:MessageType>
+          <harp:Address>32</harp:Address>
+          <harp:PayloadType>U16</harp:PayloadType>
+          <harp:Payload>0</harp:Payload>
         </Combinator>
       </Expression>
       <Expression xsi:type="MulticastSubject">

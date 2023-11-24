@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.5.1"
+<WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
@@ -12,13 +12,13 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="harp:Device">
-          <harp:PortName>COM3</harp:PortName>
-          <harp:DeviceState>Active</harp:DeviceState>
+          <harp:OperationMode>Active</harp:OperationMode>
+          <harp:OperationLed>On</harp:OperationLed>
           <harp:DumpRegisters>true</harp:DumpRegisters>
-          <harp:LedState>On</harp:LedState>
           <harp:VisualIndicators>On</harp:VisualIndicators>
-          <harp:Heartbeat>Disable</harp:Heartbeat>
+          <harp:Heartbeat>Disabled</harp:Heartbeat>
           <harp:IgnoreErrors>false</harp:IgnoreErrors>
+          <harp:PortName>COM3</harp:PortName>
         </Combinator>
       </Expression>
       <Expression xsi:type="MemberSelector">
@@ -56,7 +56,7 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:IgnoreElements" />
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>Sounds</Name>
       </Expression>
     </Nodes>

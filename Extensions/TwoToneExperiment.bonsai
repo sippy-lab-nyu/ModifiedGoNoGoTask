@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.5.1"
+<WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:p1="clr-namespace:;assembly=Extensions"
-                 xmlns:p2="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
+                 xmlns:num="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:p3="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
-                 xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
-                 xmlns:p4="clr-namespace:Bonsai.Harp.CF;assembly=Bonsai.Harp.CF"
+                 xmlns:p2="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
+                 xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
+                 xmlns:p3="clr-namespace:Bonsai.Harp.CF;assembly=Bonsai.Harp.CF"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
@@ -24,7 +24,7 @@
           <Combinator xsi:type="rx:IgnoreElements" />
         </Builder>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>Trial</Name>
       </Expression>
       <Expression xsi:type="PropertySource" TypeArguments="p1:StateTransition,p1:StateId">
@@ -34,14 +34,14 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:IgnoreElements" />
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>State</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>Joystick</Name>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p2:Abs" />
+        <Combinator xsi:type="num:Abs" />
       </Expression>
       <Expression xsi:type="ExternalizedMapping">
         <Property Name="Value" DisplayName="Joystick Threshold" Category="Joystick Properties" />
@@ -54,7 +54,7 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:DistinctUntilChanged" />
       </Expression>
-      <Expression xsi:type="Condition">
+      <Expression xsi:type="rx:Condition">
         <Name>Movement</Name>
         <Workflow>
           <Nodes>
@@ -75,7 +75,7 @@
       <Expression xsi:type="IncludeWorkflow" Path="Bonsai.Harp:WithLatestTimestamp.bonsai">
         <Name>Timestamp</Name>
       </Expression>
-      <Expression xsi:type="PublishSubject">
+      <Expression xsi:type="rx:PublishSubject">
         <Name>Threshold</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -91,7 +91,7 @@
           <Value>0</Value>
         </Operand>
       </Expression>
-      <Expression xsi:type="Condition">
+      <Expression xsi:type="rx:Condition">
         <Name>Movement</Name>
         <Workflow>
           <Nodes>
@@ -105,7 +105,7 @@
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="PublishSubject">
+      <Expression xsi:type="rx:PublishSubject">
         <Name>NoGoThreshold</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -127,7 +127,7 @@
         <Property Name="Go Response Window (s)" Category="Joystick Properties" />
         <Property Name="NoGo Response Window (s)" Category="Joystick Properties" />
       </Expression>
-      <Expression xsi:type="CreateObservable">
+      <Expression xsi:type="rx:CreateObservable">
         <Name>CreateTrial</Name>
         <Workflow>
           <Nodes>
@@ -135,9 +135,9 @@
               <Name>TrialDistribution</Name>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p3:Sample" />
+              <Combinator xsi:type="p2:Sample" />
             </Expression>
-            <Expression xsi:type="Sink">
+            <Expression xsi:type="rx:Sink">
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="SubscribeSubject">
@@ -166,6 +166,32 @@
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
               <Id>ITI</Id>
+            </Expression>
+            <Expression xsi:type="ExternalizedMapping">
+              <Property Name="Lower" DisplayName="Lower Bound ITI Duration " Category="ITI Duration (sec)" />
+              <Property Name="Upper" DisplayName="Upper Bound ITI Duration" Category="ITI Duration (sec)" />
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="p2:CreateContinuousUniform">
+                <p2:Lower>2</p2:Lower>
+                <p2:Upper>4</p2:Upper>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="p2:Sample" />
+            </Expression>
+            <Expression xsi:type="scr:ExpressionTransform">
+              <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="DueTime" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Delay">
+                <rx:DueTime>PT2.385S</rx:DueTime>
+              </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>NoGoThreshold</Name>
@@ -221,55 +247,23 @@
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
                   <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="7" Label="Source1" />
+                  <Edge From="1" To="8" Label="Source1" />
                   <Edge From="2" To="5" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="7" Label="Source1" />
                   <Edge From="4" To="5" Label="Source2" />
                   <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="9" Label="Source1" />
-                  <Edge From="7" To="9" Label="Source3" />
-                  <Edge From="8" To="9" Label="Source2" />
+                  <Edge From="7" To="9" Label="Source2" />
+                  <Edge From="8" To="9" Label="Source3" />
                   <Edge From="9" To="10" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="ExternalizedMapping">
-              <Property Name="SoundIndex" DisplayName="RewardTone" />
-            </Expression>
-            <Expression xsi:type="ExternalizedMapping">
-              <Property Name="SoundIndex" DisplayName="MissTone" />
-            </Expression>
-            <Expression xsi:type="ExternalizedMapping">
-              <Property Name="Lower" DisplayName="Lower Bound ITI Duration " Category="ITI Duration (sec)" />
-              <Property Name="Upper" DisplayName="Upper Bound ITI Duration" Category="ITI Duration (sec)" />
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p3:CreateContinuousUniform">
-                <p3:Lower>2</p3:Lower>
-                <p3:Upper>4</p3:Upper>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p3:Sample" />
-            </Expression>
-            <Expression xsi:type="scr:ExpressionTransform">
-              <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
-            </Expression>
-            <Expression xsi:type="PropertyMapping">
-              <PropertyMappings>
-                <Property Name="DueTime" />
-              </PropertyMappings>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Delay">
-                <rx:DueTime>PT2.385S</rx:DueTime>
-              </Combinator>
-            </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:CombineLatest" />
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>ReadyToGo</Name>
               <Workflow>
                 <Nodes>
@@ -300,7 +294,7 @@
                 <Value>1</Value>
               </Operand>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>GoTrial</Name>
               <Workflow>
                 <Nodes>
@@ -339,23 +333,25 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="ExternalizedMapping">
-              <Property Name="Go Response Window (s)" />
-            </Expression>
-            <Expression xsi:type="ExternalizedMapping">
-              <Property Name="NoGo Response Window (s)" />
-            </Expression>
-            <Expression xsi:type="ExternalizedMapping">
               <Property Name="GoSound" />
             </Expression>
-            <Expression xsi:type="SelectMany">
+            <Expression xsi:type="rx:SelectMany">
               <Name>StimulusPresentation</Name>
               <Workflow>
                 <Nodes>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="SoundIndex" DisplayName="GoSound" />
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>Threshold</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="BooleanProperty">
+                      <Value>false</Value>
+                    </Combinator>
                   </Expression>
                   <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="SoundIndex" DisplayName="GoSound" />
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\PlaySound.bonsai">
                     <SoundIndex>2</SoundIndex>
@@ -378,14 +374,6 @@
                       <Value>true</Value>
                     </Combinator>
                   </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>Threshold</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="BooleanProperty">
-                      <Value>false</Value>
-                    </Combinator>
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Merge" />
                   </Expression>
@@ -395,21 +383,21 @@
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
                 <Edges>
-                  <Edge From="0" To="2" Label="Source2" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="5" Label="Source1" />
-                  <Edge From="4" To="5" Label="Source2" />
-                  <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="6" To="9" Label="Source2" />
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="9" Label="Source1" />
+                  <Edge From="2" To="4" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source2" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="7" Label="Source1" />
+                  <Edge From="6" To="7" Label="Source2" />
                   <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
+                  <Edge From="8" To="9" Label="Source2" />
                   <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>CompletedStimulus</Name>
               <Workflow>
                 <Nodes>
@@ -431,10 +419,21 @@
                 <Mask>Digital0</Mask>
               </Builder>
             </Expression>
-            <Expression xsi:type="SelectMany">
+            <Expression xsi:type="ExternalizedMapping">
+              <Property Name="Go Response Window (s)" />
+            </Expression>
+            <Expression xsi:type="rx:SelectMany">
               <Name>Move</Name>
               <Workflow>
                 <Nodes>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>Threshold</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="BooleanProperty">
+                      <Value>true</Value>
+                    </Combinator>
+                  </Expression>
                   <Expression xsi:type="ExternalizedMapping">
                     <Property Name="DueTime" DisplayName="Go Response Window (s)" />
                   </Expression>
@@ -449,14 +448,6 @@
                       <Value>false</Value>
                     </Combinator>
                   </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>Threshold</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="BooleanProperty">
-                      <Value>true</Value>
-                    </Combinator>
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Merge" />
                   </Expression>
@@ -467,16 +458,16 @@
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="5" Label="Source2" />
+                  <Edge From="1" To="5" Label="Source1" />
+                  <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="4" To="5" Label="Source2" />
                   <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>Hit</Name>
               <Workflow>
                 <Nodes>
@@ -505,16 +496,16 @@
                       <Value>15</Value>
                     </Combinator>
                   </Expression>
-                  <Expression xsi:type="p4:BehaviorCommand">
-                    <p4:Type>PulsePeriod</p4:Type>
-                    <p4:Mask>Poke1Valve</p4:Mask>
+                  <Expression xsi:type="p3:BehaviorCommand">
+                    <p3:Type>PulsePeriod</p3:Type>
+                    <p3:Mask>Poke1Valve</p3:Mask>
                   </Expression>
                   <Expression xsi:type="MulticastSubject">
                     <Name>Commands</Name>
                   </Expression>
-                  <Expression xsi:type="p4:BehaviorCommand">
-                    <p4:Type>SetOutput</p4:Type>
-                    <p4:Mask>Poke1Valve</p4:Mask>
+                  <Expression xsi:type="p3:BehaviorCommand">
+                    <p3:Type>SetOutput</p3:Type>
+                    <p3:Mask>Poke1Valve</p3:Mask>
                   </Expression>
                   <Expression xsi:type="MulticastSubject">
                     <Name>Commands</Name>
@@ -532,6 +523,9 @@
                 </Edges>
               </Workflow>
             </Expression>
+            <Expression xsi:type="ExternalizedMapping">
+              <Property Name="SoundIndex" DisplayName="RewardTone" />
+            </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\PlaySound.bonsai">
               <SoundIndex>2</SoundIndex>
             </Expression>
@@ -543,7 +537,7 @@
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
               <Id>Hit</Id>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>Miss</Name>
               <Workflow>
                 <Nodes>
@@ -559,6 +553,9 @@
                 </Edges>
               </Workflow>
             </Expression>
+            <Expression xsi:type="ExternalizedMapping">
+              <Property Name="SoundIndex" DisplayName="MissTone" />
+            </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\PlaySound.bonsai">
               <SoundIndex>3</SoundIndex>
             </Expression>
@@ -570,7 +567,7 @@
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
               <Id>Miss</Id>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>NoGoTrial</Name>
               <Workflow>
                 <Nodes>
@@ -597,15 +594,23 @@
             <Expression xsi:type="ExternalizedMapping">
               <Property Name="NoGoSound" />
             </Expression>
-            <Expression xsi:type="SelectMany">
+            <Expression xsi:type="rx:SelectMany">
               <Name>StimulusPresentation</Name>
               <Workflow>
                 <Nodes>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="SoundIndex" DisplayName="NoGoSound" />
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>Threshold</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="BooleanProperty">
+                      <Value>false</Value>
+                    </Combinator>
                   </Expression>
                   <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="SoundIndex" DisplayName="NoGoSound" />
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\PlaySound.bonsai">
                     <SoundIndex>3</SoundIndex>
@@ -628,14 +633,6 @@
                       <Value>true</Value>
                     </Combinator>
                   </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>Threshold</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="BooleanProperty">
-                      <Value>false</Value>
-                    </Combinator>
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Merge" />
                   </Expression>
@@ -645,21 +642,21 @@
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
                 <Edges>
-                  <Edge From="0" To="2" Label="Source2" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="5" Label="Source1" />
-                  <Edge From="4" To="5" Label="Source2" />
-                  <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="6" To="9" Label="Source2" />
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="9" Label="Source1" />
+                  <Edge From="2" To="4" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source2" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="7" Label="Source1" />
+                  <Edge From="6" To="7" Label="Source2" />
                   <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
+                  <Edge From="8" To="9" Label="Source2" />
                   <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>CompletedStimulus</Name>
               <Workflow>
                 <Nodes>
@@ -681,24 +678,13 @@
                 <Mask>Digital1</Mask>
               </Builder>
             </Expression>
-            <Expression xsi:type="SelectMany">
+            <Expression xsi:type="ExternalizedMapping">
+              <Property Name="NoGo Response Window (s)" />
+            </Expression>
+            <Expression xsi:type="rx:SelectMany">
               <Name>DontMove</Name>
               <Workflow>
                 <Nodes>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="DueTime" DisplayName="NoGo Response Window (s)" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT3S</rx:DueTime>
-                      <rx:Period>PT0S</rx:Period>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="BooleanProperty">
-                      <Value>true</Value>
-                    </Combinator>
-                  </Expression>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>NoGoThreshold</Name>
                   </Expression>
@@ -717,6 +703,20 @@
                       <Value>false</Value>
                     </Combinator>
                   </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="DueTime" DisplayName="NoGo Response Window (s)" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Timer">
+                      <rx:DueTime>PT3S</rx:DueTime>
+                      <rx:Period>PT0S</rx:Period>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="BooleanProperty">
+                      <Value>true</Value>
+                    </Combinator>
+                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Merge" />
                   </Expression>
@@ -728,18 +728,18 @@
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
                   <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="8" Label="Source2" />
+                  <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="4" To="8" Label="Source1" />
                   <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source2" />
                   <Edge From="8" To="9" Label="Source1" />
                   <Edge From="9" To="10" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>CorrectRejection</Name>
               <Workflow>
                 <Nodes>
@@ -764,7 +764,7 @@
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
               <Id>CorrectRejection</Id>
             </Expression>
-            <Expression xsi:type="Condition">
+            <Expression xsi:type="rx:Condition">
               <Name>FalseAlarm</Name>
               <Workflow>
                 <Nodes>
@@ -814,59 +814,59 @@
             <Edge From="0" To="1" Label="Source1" />
             <Edge From="1" To="2" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
-            <Edge From="3" To="13" Label="Source1" />
+            <Edge From="3" To="9" Label="Source1" />
             <Edge From="4" To="5" Label="Source1" />
-            <Edge From="5" To="14" Label="Source2" />
-            <Edge From="6" To="36" Label="Source2" />
-            <Edge From="6" To="53" Label="Source2" />
-            <Edge From="7" To="40" Label="Source2" />
-            <Edge From="7" To="57" Label="Source2" />
-            <Edge From="8" To="9" Label="Source1" />
-            <Edge From="9" To="10" Label="Source1" />
+            <Edge From="5" To="6" Label="Source1" />
+            <Edge From="6" To="7" Label="Source1" />
+            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="8" To="9" Label="Source2" />
+            <Edge From="9" To="12" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
-            <Edge From="11" To="12" Label="Source1" />
-            <Edge From="12" To="13" Label="Source2" />
+            <Edge From="11" To="12" Label="Source2" />
+            <Edge From="12" To="13" Label="Source1" />
             <Edge From="13" To="14" Label="Source1" />
             <Edge From="14" To="15" Label="Source1" />
             <Edge From="15" To="16" Label="Source1" />
             <Edge From="16" To="17" Label="Source1" />
+            <Edge From="16" To="42" Label="Source1" />
             <Edge From="17" To="18" Label="Source1" />
             <Edge From="18" To="19" Label="Source1" />
-            <Edge From="18" To="43" Label="Source1" />
-            <Edge From="19" To="20" Label="Source1" />
+            <Edge From="19" To="25" Label="Source1" />
             <Edge From="20" To="21" Label="Source1" />
-            <Edge From="21" To="29" Label="Source1" />
+            <Edge From="21" To="22" Label="Source1" />
             <Edge From="22" To="23" Label="Source1" />
-            <Edge From="23" To="24" Label="Source1" />
-            <Edge From="24" To="25" Label="Source1" />
-            <Edge From="25" To="29" Label="Source1" />
-            <Edge From="25" To="47" Label="Source1" />
-            <Edge From="26" To="33" Label="Source2" />
-            <Edge From="27" To="51" Label="Source2" />
-            <Edge From="28" To="29" Label="Source3" />
-            <Edge From="29" To="30" Label="Source1" />
+            <Edge From="23" To="25" Label="Source1" />
+            <Edge From="23" To="46" Label="Source1" />
+            <Edge From="24" To="25" Label="Source3" />
+            <Edge From="25" To="26" Label="Source1" />
+            <Edge From="26" To="27" Label="Source1" />
+            <Edge From="27" To="28" Label="Source1" />
+            <Edge From="28" To="30" Label="Source1" />
+            <Edge From="29" To="30" Label="Source2" />
             <Edge From="30" To="31" Label="Source1" />
+            <Edge From="30" To="37" Label="Source1" />
             <Edge From="31" To="32" Label="Source1" />
-            <Edge From="32" To="33" Label="Source1" />
-            <Edge From="33" To="34" Label="Source1" />
-            <Edge From="33" To="39" Label="Source1" />
+            <Edge From="32" To="34" Label="Source1" />
+            <Edge From="33" To="34" Label="Source2" />
+            <Edge From="33" To="53" Label="Source2" />
             <Edge From="34" To="35" Label="Source1" />
             <Edge From="35" To="36" Label="Source1" />
-            <Edge From="36" To="37" Label="Source1" />
-            <Edge From="37" To="38" Label="Source1" />
-            <Edge From="38" To="62" Label="Source1" />
+            <Edge From="36" To="62" Label="Source1" />
+            <Edge From="37" To="39" Label="Source1" />
+            <Edge From="38" To="39" Label="Source2" />
+            <Edge From="38" To="57" Label="Source2" />
             <Edge From="39" To="40" Label="Source1" />
             <Edge From="40" To="41" Label="Source1" />
-            <Edge From="41" To="42" Label="Source1" />
-            <Edge From="42" To="62" Label="Source2" />
+            <Edge From="41" To="62" Label="Source2" />
+            <Edge From="42" To="43" Label="Source1" />
             <Edge From="43" To="44" Label="Source1" />
-            <Edge From="44" To="45" Label="Source1" />
-            <Edge From="45" To="47" Label="Source1" />
-            <Edge From="46" To="47" Label="Source3" />
+            <Edge From="44" To="46" Label="Source1" />
+            <Edge From="45" To="46" Label="Source3" />
+            <Edge From="46" To="47" Label="Source1" />
             <Edge From="47" To="48" Label="Source1" />
             <Edge From="48" To="49" Label="Source1" />
-            <Edge From="49" To="50" Label="Source1" />
-            <Edge From="50" To="51" Label="Source1" />
+            <Edge From="49" To="51" Label="Source1" />
+            <Edge From="50" To="51" Label="Source2" />
             <Edge From="51" To="52" Label="Source1" />
             <Edge From="51" To="56" Label="Source1" />
             <Edge From="52" To="53" Label="Source1" />
@@ -884,9 +884,6 @@
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="ExternalizedMapping">
-        <Property Name="Count" DisplayName="Number of Trials" Category="Experiment Control" />
-      </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="SubscribeSubject">
           <Name>StartTrigger</Name>
@@ -896,6 +893,9 @@
         <Builder xsi:type="Combinator">
           <Combinator xsi:type="rx:SubscribeWhen" />
         </Builder>
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Count" DisplayName="Number of Trials" Category="Experiment Control" />
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Take">
@@ -908,7 +908,7 @@
       <Expression xsi:type="MulticastSubject">
         <Name>PreviousResponse</Name>
       </Expression>
-      <Expression xsi:type="PublishSubject">
+      <Expression xsi:type="rx:PublishSubject">
         <Name>ResponseStatistics</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -988,14 +988,6 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
-        <Name>Trial</Name>
-      </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="Trial" />
-        </PropertyMappings>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
         <Name>Lick</Name>
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="Bonsai.Harp:WithLatestTimestamp.bonsai">
@@ -1004,6 +996,14 @@
       <Expression xsi:type="InputMapping">
         <PropertyMappings>
           <Property Name="ElapsedTime" Selector="Timestamp" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Trial</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="Trial" />
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -1022,7 +1022,7 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:StateStatistics" />
       </Expression>
-      <Expression xsi:type="PublishSubject">
+      <Expression xsi:type="rx:PublishSubject">
         <Name>TrialStatistics</Name>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -1049,32 +1049,34 @@
         <io:IncludeHeader>true</io:IncludeHeader>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p2:CreateRandom">
-          <p2:Seed xsi:nil="true" />
+        <Combinator xsi:type="num:CreateRandom">
+          <num:Seed xsi:nil="true" />
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p3:CreateDiscreteUniform">
-          <p3:Lower>0</p3:Lower>
-          <p3:Upper>1</p3:Upper>
+        <Combinator xsi:type="p2:CreateDiscreteUniform">
+          <p2:Lower>0</p2:Lower>
+          <p2:Upper>1</p2:Upper>
         </Combinator>
       </Expression>
-      <Expression xsi:type="AsyncSubject">
+      <Expression xsi:type="rx:AsyncSubject">
         <Name>TrialDistribution</Name>
       </Expression>
       <Expression xsi:type="PropertySource" TypeArguments="p1:TrialResponse,p1:ResponseId">
         <MemberName>Result</MemberName>
         <Value>Hit</Value>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>PreviousResponse</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>Sounds</Name>
       </Expression>
       <Expression xsi:type="harp:Parse">
-        <harp:Type>U16</harp:Type>
-        <harp:IsArray>false</harp:IsArray>
+        <harp:Register xsi:type="harp:ParseMessagePayload">
+          <harp:PayloadType>U16</harp:PayloadType>
+          <harp:IsArray>false</harp:IsArray>
+        </harp:Register>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>Path</Name>
@@ -1114,7 +1116,7 @@
         <Format>{0}\{1:yyyy-MM-ddTHH-mm-ss}</Format>
         <Selector>Value,Timestamp</Selector>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>Path</Name>
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="Extensions\HarpSoundCard.bonsai" />
@@ -1140,10 +1142,10 @@
       <Edge From="20" To="21" Label="Source1" />
       <Edge From="21" To="23" Label="Source1" />
       <Edge From="22" To="23" Label="Source2" />
-      <Edge From="23" To="26" Label="Source1" />
-      <Edge From="24" To="27" Label="Source2" />
-      <Edge From="25" To="26" Label="Source2" />
-      <Edge From="26" To="27" Label="Source1" />
+      <Edge From="23" To="25" Label="Source1" />
+      <Edge From="24" To="25" Label="Source2" />
+      <Edge From="25" To="27" Label="Source1" />
+      <Edge From="26" To="27" Label="Source2" />
       <Edge From="27" To="28" Label="Source1" />
       <Edge From="28" To="29" Label="Source1" />
       <Edge From="29" To="30" Label="Source1" />
@@ -1165,10 +1167,10 @@
       <Edge From="45" To="46" Label="Source1" />
       <Edge From="46" To="53" Label="Source2" />
       <Edge From="47" To="48" Label="Source1" />
-      <Edge From="48" To="52" Label="Source2" />
-      <Edge From="49" To="50" Label="Source1" />
+      <Edge From="48" To="49" Label="Source1" />
+      <Edge From="49" To="52" Label="Source1" />
       <Edge From="50" To="51" Label="Source1" />
-      <Edge From="51" To="52" Label="Source1" />
+      <Edge From="51" To="52" Label="Source2" />
       <Edge From="52" To="53" Label="Source3" />
       <Edge From="53" To="54" Label="Source1" />
       <Edge From="53" To="57" Label="Source1" />
