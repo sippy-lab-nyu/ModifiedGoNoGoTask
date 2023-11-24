@@ -11,11 +11,11 @@
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
-                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                 xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:vid="clr-namespace:Bonsai.Video;assembly=Bonsai.Video"
                  xmlns:p4="clr-namespace:ModifiedGoNoGoTask;assembly=Extensions"
+                 xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -275,7 +275,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
-                      <rx:DueTime>PT0.561S</rx:DueTime>
+                      <rx:DueTime>PT0.899S</rx:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
@@ -334,7 +334,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Throttle">
-                            <rx:DueTime>PT2.86S</rx:DueTime>
+                            <rx:DueTime>PT3.367S</rx:DueTime>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="Combinator">
@@ -1461,7 +1461,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44/ResponseStat.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/ResponseStat.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1502,9 +1502,9 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateTransition">
-                <p1:Trial>4</p1:Trial>
-                <p1:Id>Go</p1:Id>
-                <p1:ElapsedTime>7858252.720032</p1:ElapsedTime>
+                <p1:Trial>17</p1:Trial>
+                <p1:Id>ITI</p1:Id>
+                <p1:ElapsedTime>7859515.390016</p1:ElapsedTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -1533,7 +1533,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44/GoTone_StateTransitions.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/GoTone_StateTransitions.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1595,7 +1595,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44/sounds.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/sounds.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1781,7 +1781,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44/Joystick.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/Joystick.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -1907,7 +1907,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44/soundcard.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/soundcard.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -2088,69 +2088,6 @@
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>TrialStatistics</Name>
-      </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>ResponseStatistics</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>ResponseStatistics</Name>
-            </Expression>
-            <Expression xsi:type="ExternalizedMapping">
-              <Property Name="Count" />
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:BufferCount">
-                <rx:Count>20</rx:Count>
-                <rx:Skip>1</rx:Skip>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>20</rx:Count>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:IncrementalBuffer" />
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Merge" />
-            </Expression>
-            <Expression xsi:type="rx:Visualizer">
-              <Name>Response Stat</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p1:ResponseStatistics" />
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="2" Label="Source1" />
-            <Edge From="0" To="3" Label="Source1" />
-            <Edge From="1" To="2" Label="Source2" />
-            <Edge From="1" To="3" Label="Source2" />
-            <Edge From="2" To="5" Label="Source1" />
-            <Edge From="3" To="4" Label="Source1" />
-            <Edge From="4" To="5" Label="Source2" />
-            <Edge From="5" To="6" Label="Source1" />
-            <Edge From="6" To="7" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="GroupWorkflow">
           <Name>CameraVisualizer</Name>
@@ -2192,274 +2129,6 @@
             </Edges>
           </Workflow>
         </Builder>
-      </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>JoystickVisualizer</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>Joystick</Name>
-            </Expression>
-            <Expression xsi:type="GroupWorkflow">
-              <Name>Downsampling</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="Factor" />
-                  </Expression>
-                  <Expression xsi:type="GroupWorkflow">
-                    <Name>Buffer</Name>
-                    <Workflow>
-                      <Nodes>
-                        <Expression xsi:type="WorkflowInput">
-                          <Name>Source1</Name>
-                        </Expression>
-                        <Expression xsi:type="ExternalizedMapping">
-                          <Property Name="Count" DisplayName="Factor" Description="The integral factor by which to divide the sampling rate of the input signal." />
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="dsp:Buffer">
-                            <dsp:Count>20</dsp:Count>
-                            <dsp:Skip xsi:nil="true" />
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="WorkflowOutput" />
-                      </Nodes>
-                      <Edges>
-                        <Edge From="0" To="2" Label="Source1" />
-                        <Edge From="1" To="2" Label="Source2" />
-                        <Edge From="2" To="3" Label="Source1" />
-                      </Edges>
-                    </Workflow>
-                  </Expression>
-                  <Expression xsi:type="GroupWorkflow">
-                    <Name>KernelLength</Name>
-                    <Workflow>
-                      <Nodes>
-                        <Expression xsi:type="ExternalizedMapping">
-                          <Property Name="Value" DisplayName="Factor" Description="The integral factor by which to divide the sampling rate of the input signal." />
-                        </Expression>
-                        <Expression xsi:type="PropertySource" TypeArguments="dsp:Decimate,sys:Int32">
-                          <MemberName>KernelLength</MemberName>
-                          <Value>20</Value>
-                        </Expression>
-                        <Expression xsi:type="Divide">
-                          <Operand xsi:type="IntProperty">
-                            <Value>2</Value>
-                          </Operand>
-                        </Expression>
-                        <Expression xsi:type="WorkflowOutput" />
-                      </Nodes>
-                      <Edges>
-                        <Edge From="0" To="1" Label="Source1" />
-                        <Edge From="1" To="2" Label="Source1" />
-                        <Edge From="2" To="3" Label="Source1" />
-                      </Edges>
-                    </Workflow>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="KernelLength" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="dsp:Decimate">
-                      <dsp:Downsampling>LowPass</dsp:Downsampling>
-                      <dsp:BufferLength>1</dsp:BufferLength>
-                      <dsp:Factor>20</dsp:Factor>
-                      <dsp:SampleRate>1000</dsp:SampleRate>
-                      <dsp:KernelLength>10</dsp:KernelLength>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Index">
-                    <Operand xsi:type="IntProperty">
-                      <Value>0</Value>
-                    </Operand>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Val0</Selector>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="2" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source2" />
-                  <Edge From="1" To="3" Label="Source1" />
-                  <Edge From="1" To="5" Label="Source2" />
-                  <Edge From="2" To="5" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="5" Label="Source3" />
-                  <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="GroupWorkflow">
-              <Name>TrialGraph - Time (sec)</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="rx:Visualizer">
-                    <Name>TrialGraph</Name>
-                    <Workflow>
-                      <Nodes>
-                        <Expression xsi:type="WorkflowInput">
-                          <Name>Source1</Name>
-                        </Expression>
-                        <Expression xsi:type="GroupWorkflow">
-                          <Name>WithTrialTimestamp</Name>
-                          <Workflow>
-                            <Nodes>
-                              <Expression xsi:type="WorkflowInput">
-                                <Name>Source1</Name>
-                              </Expression>
-                              <Expression xsi:type="ExternalizedMapping">
-                                <Property Name="Name" />
-                              </Expression>
-                              <Expression xsi:type="SubscribeSubject">
-                                <Name>Timestamp</Name>
-                              </Expression>
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="rx:Take">
-                                  <rx:Count>1</rx:Count>
-                                </Combinator>
-                              </Expression>
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="rx:CombineLatest" />
-                              </Expression>
-                              <Expression xsi:type="Subtract" />
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="rx:WithLatestFrom" />
-                              </Expression>
-                              <Expression xsi:type="SubscribeSubject">
-                                <Name>JoystickThreshold</Name>
-                              </Expression>
-                              <Expression xsi:type="SubscribeSubject">
-                                <Name>ITIUpper</Name>
-                              </Expression>
-                              <Expression xsi:type="SubscribeSubject">
-                                <Name>ITILower</Name>
-                              </Expression>
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="DoubleProperty">
-                                  <Value>0</Value>
-                                </Combinator>
-                              </Expression>
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="rx:First" />
-                              </Expression>
-                              <Expression xsi:type="SubscribeSubject">
-                                <Name>ToneTick</Name>
-                              </Expression>
-                              <Expression xsi:type="SubscribeSubject">
-                                <Name>JoystickThreshold</Name>
-                              </Expression>
-                              <Expression xsi:type="PropertyMapping">
-                                <PropertyMappings>
-                                  <Property Name="Value" />
-                                </PropertyMappings>
-                              </Expression>
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="DoubleProperty">
-                                  <Value>0.019999999552965164</Value>
-                                </Combinator>
-                              </Expression>
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="rx:First" />
-                              </Expression>
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="rx:Concat" />
-                              </Expression>
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="rx:Repeat" />
-                              </Expression>
-                              <Expression xsi:type="Combinator">
-                                <Combinator xsi:type="rx:CombineLatest" />
-                              </Expression>
-                              <Expression xsi:type="scr:ExpressionTransform">
-                                <scr:Expression>new(
-Item1.Item2 as Timestamp,
-Item1.Item1 as Value,
-Item2 as Threshold,
-Item3 as ITIUpper,
-Item4 as ITILower,
-Item5 as NoGoToneTick)</scr:Expression>
-                              </Expression>
-                              <Expression xsi:type="WorkflowOutput" />
-                              <Expression xsi:type="SubscribeSubject">
-                                <Name>AllToneTick</Name>
-                              </Expression>
-                              <Expression xsi:type="rx:PublishSubject">
-                                <Name>ToneTick</Name>
-                              </Expression>
-                            </Nodes>
-                            <Edges>
-                              <Edge From="0" To="6" Label="Source1" />
-                              <Edge From="1" To="2" Label="Source1" />
-                              <Edge From="2" To="3" Label="Source1" />
-                              <Edge From="2" To="4" Label="Source1" />
-                              <Edge From="3" To="4" Label="Source2" />
-                              <Edge From="4" To="5" Label="Source1" />
-                              <Edge From="5" To="6" Label="Source2" />
-                              <Edge From="6" To="19" Label="Source1" />
-                              <Edge From="7" To="19" Label="Source2" />
-                              <Edge From="8" To="19" Label="Source3" />
-                              <Edge From="9" To="19" Label="Source4" />
-                              <Edge From="10" To="11" Label="Source1" />
-                              <Edge From="11" To="17" Label="Source1" />
-                              <Edge From="12" To="15" Label="Source1" />
-                              <Edge From="13" To="14" Label="Source1" />
-                              <Edge From="14" To="15" Label="Source2" />
-                              <Edge From="15" To="16" Label="Source1" />
-                              <Edge From="16" To="17" Label="Source2" />
-                              <Edge From="17" To="18" Label="Source1" />
-                              <Edge From="18" To="19" Label="Source5" />
-                              <Edge From="19" To="20" Label="Source1" />
-                              <Edge From="20" To="21" Label="Source1" />
-                              <Edge From="22" To="23" Label="Source1" />
-                            </Edges>
-                          </Workflow>
-                        </Expression>
-                        <Expression xsi:type="viz:RollingGraphBuilder">
-                          <viz:IndexSelector>Timestamp</viz:IndexSelector>
-                          <viz:ValueSelector>Value,Threshold,ITIUpper,ITILower,NoGoToneTick</viz:ValueSelector>
-                          <viz:SymbolType>None</viz:SymbolType>
-                          <viz:LineWidth>1</viz:LineWidth>
-                          <viz:Capacity>1000</viz:Capacity>
-                          <viz:Min xsi:nil="true" />
-                          <viz:Max xsi:nil="true" />
-                        </Expression>
-                        <Expression xsi:type="WorkflowOutput" />
-                      </Nodes>
-                      <Edges>
-                        <Edge From="0" To="1" Label="Source1" />
-                        <Edge From="1" To="2" Label="Source1" />
-                        <Edge From="2" To="3" Label="Source1" />
-                      </Edges>
-                    </Workflow>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-          </Edges>
-        </Workflow>
       </Expression>
       <Expression xsi:type="ExternalizedMapping">
         <Property Name="Index" DisplayName="Camera Index" Category="Camera Settings" />
@@ -2528,7 +2197,7 @@ Item5 as NoGoToneTick)</scr:Expression>
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44/JoystickTrace.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/JoystickTrace.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2704,7 +2373,7 @@ Item2 as Metadata)</scr:Expression>
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44/LickTrace.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/LickTrace.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2736,6 +2405,36 @@ Item2 as Metadata)</scr:Expression>
           </vid:CaptureProperties>
         </Combinator>
       </Expression>
+      <Expression xsi:type="rx:PublishSubject">
+        <Name>Video</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>SessionMetadata</Name>
+      </Expression>
+      <Expression xsi:type="Format">
+        <Format>{0}\{1}_{2}_{3:yyyy-MM-ddTHH-mm-ss}.avi</Format>
+        <Selector>Path,Metadata.Value.SubjectId,Metadata.Value.ExperimentName,Metadata.Timestamp</Selector>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:VideoWriter">
+          <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02\SP001_LickTask_2023-11-24T10-42-02.avi</cv:FileName>
+          <cv:Suffix>None</cv:Suffix>
+          <cv:Buffered>true</cv:Buffered>
+          <cv:Overwrite>false</cv:Overwrite>
+          <cv:FourCC>FMP4</cv:FourCC>
+          <cv:FrameRate>30</cv:FrameRate>
+          <cv:FrameSize>
+            <cv:Width>0</cv:Width>
+            <cv:Height>0</cv:Height>
+          </cv:FrameSize>
+          <cv:ResizeInterpolation>NearestNeighbor</cv:ResizeInterpolation>
+        </Combinator>
+      </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="Extensions\WithLatestTimestamp.bonsai">
         <Name>Timestamp</Name>
       </Expression>
@@ -2753,38 +2452,11 @@ Item2 as Metadata)</scr:Expression>
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44/VideoTimestamps.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/VideoTimestamps.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
         <io:IncludeHeader>false</io:IncludeHeader>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>SessionMetadata</Name>
-      </Expression>
-      <Expression xsi:type="Format">
-        <Format>{0}\{1}_{2}_{3:yyyy-MM-ddTHH-mm-ss}.avi</Format>
-        <Selector>Path,Metadata.Value.SubjectId,Metadata.Value.ExperimentName,Metadata.Timestamp</Selector>
-      </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44\SP001_LickTask_2023-11-24T10-22-44.avi</cv:FileName>
-          <cv:Suffix>None</cv:Suffix>
-          <cv:Buffered>true</cv:Buffered>
-          <cv:Overwrite>false</cv:Overwrite>
-          <cv:FourCC>FMP4</cv:FourCC>
-          <cv:FrameRate>30</cv:FrameRate>
-          <cv:FrameSize>
-            <cv:Width>0</cv:Width>
-            <cv:Height>0</cv:Height>
-          </cv:FrameSize>
-          <cv:ResizeInterpolation>NearestNeighbor</cv:ResizeInterpolation>
-        </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>StartTrigger</Name>
@@ -2824,7 +2496,7 @@ Item2 as Metadata)</scr:Expression>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:WriteAllText">
-          <p1:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-22-44/TaskParameters.yml</p1:Path>
+          <p1:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/TaskParameters.yml</p1:Path>
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -2835,63 +2507,374 @@ Item2 as Metadata)</scr:Expression>
       <Expression xsi:type="rx:AsyncSubject">
         <Name>Random</Name>
       </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>TrialStatistics</Name>
+      </Expression>
+      <Expression xsi:type="VisualizerMapping" />
+      <Expression xsi:type="GroupWorkflow">
+        <Name>ResponseStatistics</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>ResponseStatistics</Name>
+            </Expression>
+            <Expression xsi:type="ExternalizedMapping">
+              <Property Name="Count" />
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:BufferCount">
+                <rx:Count>20</rx:Count>
+                <rx:Skip>1</rx:Skip>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Take">
+                <rx:Count>20</rx:Count>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="p1:IncrementalBuffer" />
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Merge" />
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="p1:ResponseStatistics" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="2" Label="Source1" />
+            <Edge From="0" To="3" Label="Source1" />
+            <Edge From="1" To="2" Label="Source2" />
+            <Edge From="1" To="3" Label="Source2" />
+            <Edge From="2" To="5" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="4" To="5" Label="Source2" />
+            <Edge From="5" To="6" Label="Source1" />
+            <Edge From="6" To="7" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="VisualizerMapping">
+        <VisualizerType xsi:type="TypeMapping" TypeArguments="p1:ResponseVisualizer" />
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>JoystickVisualizer</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Joystick</Name>
+            </Expression>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>Downsampling</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="Factor" />
+                  </Expression>
+                  <Expression xsi:type="GroupWorkflow">
+                    <Name>Buffer</Name>
+                    <Workflow>
+                      <Nodes>
+                        <Expression xsi:type="WorkflowInput">
+                          <Name>Source1</Name>
+                        </Expression>
+                        <Expression xsi:type="ExternalizedMapping">
+                          <Property Name="Count" DisplayName="Factor" Description="The integral factor by which to divide the sampling rate of the input signal." />
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="dsp:Buffer">
+                            <dsp:Count>20</dsp:Count>
+                            <dsp:Skip xsi:nil="true" />
+                          </Combinator>
+                        </Expression>
+                        <Expression xsi:type="WorkflowOutput" />
+                      </Nodes>
+                      <Edges>
+                        <Edge From="0" To="2" Label="Source1" />
+                        <Edge From="1" To="2" Label="Source2" />
+                        <Edge From="2" To="3" Label="Source1" />
+                      </Edges>
+                    </Workflow>
+                  </Expression>
+                  <Expression xsi:type="GroupWorkflow">
+                    <Name>KernelLength</Name>
+                    <Workflow>
+                      <Nodes>
+                        <Expression xsi:type="ExternalizedMapping">
+                          <Property Name="Value" DisplayName="Factor" Description="The integral factor by which to divide the sampling rate of the input signal." />
+                        </Expression>
+                        <Expression xsi:type="PropertySource" TypeArguments="dsp:Decimate,sys:Int32">
+                          <MemberName>KernelLength</MemberName>
+                          <Value>20</Value>
+                        </Expression>
+                        <Expression xsi:type="Divide">
+                          <Operand xsi:type="IntProperty">
+                            <Value>2</Value>
+                          </Operand>
+                        </Expression>
+                        <Expression xsi:type="WorkflowOutput" />
+                      </Nodes>
+                      <Edges>
+                        <Edge From="0" To="1" Label="Source1" />
+                        <Edge From="1" To="2" Label="Source1" />
+                        <Edge From="2" To="3" Label="Source1" />
+                      </Edges>
+                    </Workflow>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="KernelLength" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="dsp:Decimate">
+                      <dsp:Downsampling>LowPass</dsp:Downsampling>
+                      <dsp:BufferLength>1</dsp:BufferLength>
+                      <dsp:Factor>20</dsp:Factor>
+                      <dsp:SampleRate>1000</dsp:SampleRate>
+                      <dsp:KernelLength>10</dsp:KernelLength>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Index">
+                    <Operand xsi:type="IntProperty">
+                      <Value>0</Value>
+                    </Operand>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Val0</Selector>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="2" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source2" />
+                  <Edge From="1" To="3" Label="Source1" />
+                  <Edge From="1" To="5" Label="Source2" />
+                  <Edge From="2" To="5" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="4" To="5" Label="Source3" />
+                  <Edge From="5" To="6" Label="Source1" />
+                  <Edge From="6" To="7" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                </Edges>
+              </Workflow>
+            </Expression>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>WithTrialTimestamp</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="Name" />
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>Timestamp</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Take">
+                      <rx:Count>1</rx:Count>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:CombineLatest" />
+                  </Expression>
+                  <Expression xsi:type="Subtract" />
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:WithLatestFrom" />
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>JoystickThreshold</Name>
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>ITIUpper</Name>
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>ITILower</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="DoubleProperty">
+                      <Value>0</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:First" />
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>ToneTick</Name>
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>JoystickThreshold</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="Value" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="DoubleProperty">
+                      <Value>0.019999999552965164</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:First" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Concat" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Repeat" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:CombineLatest" />
+                  </Expression>
+                  <Expression xsi:type="scr:ExpressionTransform">
+                    <scr:Expression>new(
+Item1.Item2 as Timestamp,
+Item1.Item1 as Value,
+Item2 as Threshold,
+Item3 as ITIUpper,
+Item4 as ITILower,
+Item5 as NoGoToneTick)</scr:Expression>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>AllToneTick</Name>
+                  </Expression>
+                  <Expression xsi:type="rx:PublishSubject">
+                    <Name>ToneTick</Name>
+                  </Expression>
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="6" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
+                  <Edge From="2" To="3" Label="Source1" />
+                  <Edge From="2" To="4" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source2" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source2" />
+                  <Edge From="6" To="19" Label="Source1" />
+                  <Edge From="7" To="19" Label="Source2" />
+                  <Edge From="8" To="19" Label="Source3" />
+                  <Edge From="9" To="19" Label="Source4" />
+                  <Edge From="10" To="11" Label="Source1" />
+                  <Edge From="11" To="17" Label="Source1" />
+                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="13" To="14" Label="Source1" />
+                  <Edge From="14" To="15" Label="Source2" />
+                  <Edge From="15" To="16" Label="Source1" />
+                  <Edge From="16" To="17" Label="Source2" />
+                  <Edge From="17" To="18" Label="Source1" />
+                  <Edge From="18" To="19" Label="Source5" />
+                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="20" To="21" Label="Source1" />
+                  <Edge From="22" To="23" Label="Source1" />
+                </Edges>
+              </Workflow>
+            </Expression>
+            <Expression xsi:type="viz:RollingGraphBuilder">
+              <viz:IndexSelector>Timestamp</viz:IndexSelector>
+              <viz:ValueSelector>Value,Threshold,ITIUpper,ITILower,NoGoToneTick</viz:ValueSelector>
+              <viz:SymbolType>None</viz:SymbolType>
+              <viz:LineWidth>1</viz:LineWidth>
+              <viz:Capacity>1000</viz:Capacity>
+              <viz:Min xsi:nil="true" />
+              <viz:Max xsi:nil="true" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="VisualizerMapping" />
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Video</Name>
+      </Expression>
+      <Expression xsi:type="VisualizerMapping" />
+      <Expression xsi:type="viz:TableLayoutPanelBuilder">
+        <viz:ColumnCount>2</viz:ColumnCount>
+        <viz:RowCount>2</viz:RowCount>
+        <viz:ColumnStyles />
+        <viz:RowStyles />
+        <viz:CellSpans />
+      </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
       <Edge From="1" To="2" Label="Source1" />
-      <Edge From="7" To="8" Label="Source1" />
-      <Edge From="8" To="10" Label="Source1" />
-      <Edge From="9" To="10" Label="Source2" />
-      <Edge From="11" To="12" Label="Source1" />
-      <Edge From="11" To="14" Label="Source2" />
+      <Edge From="4" To="5" Label="Source1" />
+      <Edge From="5" To="7" Label="Source1" />
+      <Edge From="6" To="7" Label="Source2" />
+      <Edge From="8" To="9" Label="Source1" />
+      <Edge From="8" To="11" Label="Source2" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="11" To="15" Label="Source1" />
+      <Edge From="12" To="13" Label="Source1" />
       <Edge From="13" To="14" Label="Source1" />
-      <Edge From="14" To="18" Label="Source1" />
-      <Edge From="15" To="16" Label="Source1" />
+      <Edge From="14" To="15" Label="Source2" />
       <Edge From="16" To="17" Label="Source1" />
-      <Edge From="17" To="18" Label="Source2" />
+      <Edge From="17" To="18" Label="Source1" />
+      <Edge From="18" To="24" Label="Source1" />
       <Edge From="19" To="20" Label="Source1" />
-      <Edge From="20" To="21" Label="Source1" />
-      <Edge From="21" To="27" Label="Source1" />
-      <Edge From="22" To="23" Label="Source1" />
-      <Edge From="23" To="26" Label="Source1" />
-      <Edge From="24" To="25" Label="Source1" />
-      <Edge From="25" To="26" Label="Source2" />
-      <Edge From="26" To="27" Label="Source2" />
-      <Edge From="28" To="29" Label="Source1" />
-      <Edge From="29" To="36" Label="Source1" />
-      <Edge From="30" To="31" Label="Source1" />
-      <Edge From="31" To="36" Label="Source2" />
-      <Edge From="32" To="33" Label="Source1" />
-      <Edge From="33" To="36" Label="Source3" />
+      <Edge From="20" To="23" Label="Source1" />
+      <Edge From="21" To="22" Label="Source1" />
+      <Edge From="22" To="23" Label="Source2" />
+      <Edge From="23" To="24" Label="Source2" />
+      <Edge From="25" To="26" Label="Source1" />
+      <Edge From="26" To="33" Label="Source1" />
+      <Edge From="27" To="28" Label="Source1" />
+      <Edge From="28" To="33" Label="Source2" />
+      <Edge From="29" To="30" Label="Source1" />
+      <Edge From="30" To="33" Label="Source3" />
+      <Edge From="31" To="32" Label="Source1" />
+      <Edge From="32" To="33" Label="Source4" />
+      <Edge From="33" To="34" Label="Source1" />
       <Edge From="34" To="35" Label="Source1" />
-      <Edge From="35" To="36" Label="Source4" />
-      <Edge From="36" To="37" Label="Source1" />
-      <Edge From="37" To="38" Label="Source1" />
-      <Edge From="38" To="39" Label="Source1" />
-      <Edge From="40" To="42" Label="Source1" />
-      <Edge From="41" To="42" Label="Source2" />
-      <Edge From="42" To="46" Label="Source1" />
-      <Edge From="43" To="44" Label="Source1" />
+      <Edge From="35" To="36" Label="Source1" />
+      <Edge From="37" To="39" Label="Source1" />
+      <Edge From="38" To="39" Label="Source2" />
+      <Edge From="39" To="43" Label="Source1" />
+      <Edge From="40" To="41" Label="Source1" />
+      <Edge From="41" To="42" Label="Source1" />
+      <Edge From="42" To="43" Label="Source2" />
       <Edge From="44" To="45" Label="Source1" />
-      <Edge From="45" To="46" Label="Source2" />
+      <Edge From="45" To="49" Label="Source1" />
+      <Edge From="46" To="47" Label="Source1" />
       <Edge From="47" To="48" Label="Source1" />
-      <Edge From="47" To="56" Label="Source1" />
-      <Edge From="48" To="52" Label="Source1" />
+      <Edge From="48" To="49" Label="Source2" />
       <Edge From="49" To="50" Label="Source1" />
-      <Edge From="50" To="51" Label="Source1" />
-      <Edge From="51" To="52" Label="Source2" />
-      <Edge From="53" To="54" Label="Source1" />
-      <Edge From="54" To="55" Label="Source1" />
-      <Edge From="55" To="56" Label="Source2" />
+      <Edge From="50" To="54" Label="Source1" />
+      <Edge From="51" To="52" Label="Source1" />
+      <Edge From="52" To="53" Label="Source1" />
+      <Edge From="53" To="54" Label="Source2" />
+      <Edge From="55" To="56" Label="Source1" />
       <Edge From="57" To="58" Label="Source1" />
-      <Edge From="59" To="60" Label="Source1" />
+      <Edge From="58" To="59" Label="Source1" />
       <Edge From="60" To="61" Label="Source1" />
+      <Edge From="61" To="65" Label="Source1" />
       <Edge From="62" To="63" Label="Source1" />
-      <Edge From="63" To="67" Label="Source1" />
-      <Edge From="64" To="65" Label="Source1" />
-      <Edge From="65" To="66" Label="Source1" />
-      <Edge From="66" To="67" Label="Source2" />
+      <Edge From="63" To="64" Label="Source1" />
+      <Edge From="64" To="65" Label="Source2" />
+      <Edge From="66" To="67" Label="Source1" />
       <Edge From="68" To="69" Label="Source1" />
+      <Edge From="69" To="76" Label="Source1" />
+      <Edge From="70" To="71" Label="Source1" />
+      <Edge From="71" To="76" Label="Source2" />
+      <Edge From="72" To="73" Label="Source1" />
+      <Edge From="73" To="76" Label="Source3" />
+      <Edge From="74" To="75" Label="Source1" />
+      <Edge From="75" To="76" Label="Source4" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
