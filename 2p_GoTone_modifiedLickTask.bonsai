@@ -12,9 +12,9 @@
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
-                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:vid="clr-namespace:Bonsai.Video;assembly=Bonsai.Video"
                  xmlns:p4="clr-namespace:ModifiedGoNoGoTask;assembly=Extensions"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -258,8 +258,8 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="p2:CreateContinuousUniform">
-                      <p2:Lower>0.5</p2:Lower>
-                      <p2:Upper>1</p2:Upper>
+                      <p2:Lower>5</p2:Lower>
+                      <p2:Upper>7</p2:Upper>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -275,7 +275,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
-                      <rx:DueTime>PT0.899S</rx:DueTime>
+                      <rx:DueTime>PT6.097S</rx:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
@@ -286,8 +286,8 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="p2:CreateContinuousUniform">
-                      <p2:Lower>2.5</p2:Lower>
-                      <p2:Upper>3.5</p2:Upper>
+                      <p2:Lower>2</p2:Lower>
+                      <p2:Upper>4</p2:Upper>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -334,7 +334,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Throttle">
-                            <rx:DueTime>PT3.367S</rx:DueTime>
+                            <rx:DueTime>PT3.353S</rx:DueTime>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="Combinator">
@@ -403,7 +403,7 @@
                   </Expression>
                   <Expression xsi:type="LessThanOrEqual">
                     <Operand xsi:type="IntProperty">
-                      <Value>50</Value>
+                      <Value>60</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
@@ -708,7 +708,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="FloatProperty">
-                      <Value>6</Value>
+                      <Value>1</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="scr:ExpressionTransform">
@@ -774,7 +774,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Timer">
-                            <rx:DueTime>PT6S</rx:DueTime>
+                            <rx:DueTime>PT1S</rx:DueTime>
                             <rx:Period>PT0S</rx:Period>
                           </Combinator>
                         </Expression>
@@ -849,7 +849,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="IntProperty">
-                            <Value>60</Value>
+                            <Value>40</Value>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="p3:BehaviorCommand">
@@ -1183,7 +1183,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="FloatProperty">
-                      <Value>6</Value>
+                      <Value>12</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="scr:ExpressionTransform">
@@ -1206,7 +1206,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Delay">
-                            <rx:DueTime>PT6S</rx:DueTime>
+                            <rx:DueTime>PT12S</rx:DueTime>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="WorkflowOutput" />
@@ -1435,7 +1435,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Take">
-                <rx:Count>200</rx:Count>
+                <rx:Count>500</rx:Count>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -1461,7 +1461,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/ResponseStat.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40/ResponseStat.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1502,9 +1502,9 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateTransition">
-                <p1:Trial>17</p1:Trial>
+                <p1:Trial>0</p1:Trial>
                 <p1:Id>ITI</p1:Id>
-                <p1:ElapsedTime>7859515.390016</p1:ElapsedTime>
+                <p1:ElapsedTime>8212322.570016</p1:ElapsedTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -1533,7 +1533,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/GoTone_StateTransitions.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40/GoTone_StateTransitions.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1595,7 +1595,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/sounds.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40/sounds.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1781,7 +1781,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/Joystick.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40/Joystick.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -1907,7 +1907,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/soundcard.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40/soundcard.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -2197,7 +2197,7 @@
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/JoystickTrace.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40/JoystickTrace.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2261,94 +2261,16 @@
         </Builder>
       </Expression>
       <Expression xsi:type="ExternalizedMapping">
-        <Property Name="Value" DisplayName="DataPath" Category="Experiment Control" />
+        <Property Name="DataPath" />
+        <Property Name="ExperimenterId" />
+        <Property Name="SubjectId" />
+        <Property Name="ExperimentName" />
       </Expression>
-      <Expression xsi:type="PropertySource" TypeArguments="io:EnumerateFiles,sys:String">
-        <MemberName>Path</MemberName>
-        <Value>C:\Users\SippylabJan\Desktop\BehaviorData</Value>
-      </Expression>
-      <Expression xsi:type="ExternalizedMapping">
-        <Property Name="Value" DisplayName="ExperimenterId" Category="Experiment Control" />
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="StringProperty">
-          <Value>Shriya</Value>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="ExternalizedMapping">
-        <Property Name="Value" DisplayName="SubjectId" Category="Experiment Control" />
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="StringProperty">
-          <Value>SP001</Value>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="ExternalizedMapping">
-        <Property Name="Value" DisplayName="ExperimentName" Category="Experiment Control" />
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="StringProperty">
-          <Value>LickTask</Value>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Zip" />
-      </Expression>
-      <Expression xsi:type="scr:ExpressionTransform">
-        <scr:Expression>new(
-Item1 as DataPath,
-Item2 as ExperimenterId,
-Item3 as SubjectId,
-Item4 as ExperimentName)</scr:Expression>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Timestamp" />
-      </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>SessionMetadata</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="WorkflowInput">
-              <Name>Source1</Name>
-            </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
-              <Name>SessionManualInfo</Name>
-            </Expression>
-            <Expression xsi:type="Format">
-              <Format>{0}/{1}/{3}/{2}_{3}_{4:yyyy-MM-ddTHH-mm-ss}</Format>
-              <Selector>Value.DataPath,Value.ExperimenterId,Value.SubjectId,Value.ExperimentName,Timestamp</Selector>
-            </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
-              <Name>Path</Name>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>Path</Name>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>SessionManualInfo</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Zip" />
-            </Expression>
-            <Expression xsi:type="scr:ExpressionTransform">
-              <scr:Expression>new(
-Item1 as Path,
-Item2 as Metadata)</scr:Expression>
-            </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
-              <Name>SessionMetadata</Name>
-            </Expression>
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-            <Edge From="4" To="6" Label="Source1" />
-            <Edge From="5" To="6" Label="Source2" />
-            <Edge From="6" To="7" Label="Source1" />
-            <Edge From="7" To="8" Label="Source1" />
-          </Edges>
-        </Workflow>
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\SessionMetadata.bonsai">
+        <DataPath>C:\Users\SippylabJan\Desktop\BehaviorData</DataPath>
+        <ExperimenterId>Shriya</ExperimenterId>
+        <SubjectId>SP042</SubjectId>
+        <ExperimentName>AudLickTask_Day6</ExperimentName>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>Timestamp</Name>
@@ -2373,7 +2295,7 @@ Item2 as Metadata)</scr:Expression>
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/LickTrace.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40/LickTrace.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2422,7 +2344,7 @@ Item2 as Metadata)</scr:Expression>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02\SP001_LickTask_2023-11-24T10-42-02.avi</cv:FileName>
+          <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40\SP042_AudLickTask_Day6_2023-11-28T12-44-40.avi</cv:FileName>
           <cv:Suffix>None</cv:Suffix>
           <cv:Buffered>true</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -2452,7 +2374,7 @@ Item2 as Metadata)</scr:Expression>
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/VideoTimestamps.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40/VideoTimestamps.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2496,7 +2418,7 @@ Item2 as Metadata)</scr:Expression>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:WriteAllText">
-          <p1:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/LickTask/SP001_LickTask_2023-11-24T10-42-02/TaskParameters.yml</p1:Path>
+          <p1:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2023-11-28T12-44-40/TaskParameters.yml</p1:Path>
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -2832,49 +2754,39 @@ Item5 as NoGoToneTick)</scr:Expression>
       <Edge From="22" To="23" Label="Source2" />
       <Edge From="23" To="24" Label="Source2" />
       <Edge From="25" To="26" Label="Source1" />
-      <Edge From="26" To="33" Label="Source1" />
-      <Edge From="27" To="28" Label="Source1" />
-      <Edge From="28" To="33" Label="Source2" />
-      <Edge From="29" To="30" Label="Source1" />
-      <Edge From="30" To="33" Label="Source3" />
+      <Edge From="27" To="29" Label="Source1" />
+      <Edge From="28" To="29" Label="Source2" />
+      <Edge From="29" To="33" Label="Source1" />
+      <Edge From="30" To="31" Label="Source1" />
       <Edge From="31" To="32" Label="Source1" />
-      <Edge From="32" To="33" Label="Source4" />
-      <Edge From="33" To="34" Label="Source1" />
+      <Edge From="32" To="33" Label="Source2" />
       <Edge From="34" To="35" Label="Source1" />
-      <Edge From="35" To="36" Label="Source1" />
-      <Edge From="37" To="39" Label="Source1" />
+      <Edge From="35" To="39" Label="Source1" />
+      <Edge From="36" To="37" Label="Source1" />
+      <Edge From="37" To="38" Label="Source1" />
       <Edge From="38" To="39" Label="Source2" />
-      <Edge From="39" To="43" Label="Source1" />
-      <Edge From="40" To="41" Label="Source1" />
+      <Edge From="39" To="40" Label="Source1" />
+      <Edge From="40" To="44" Label="Source1" />
       <Edge From="41" To="42" Label="Source1" />
-      <Edge From="42" To="43" Label="Source2" />
-      <Edge From="44" To="45" Label="Source1" />
-      <Edge From="45" To="49" Label="Source1" />
-      <Edge From="46" To="47" Label="Source1" />
+      <Edge From="42" To="43" Label="Source1" />
+      <Edge From="43" To="44" Label="Source2" />
+      <Edge From="45" To="46" Label="Source1" />
       <Edge From="47" To="48" Label="Source1" />
-      <Edge From="48" To="49" Label="Source2" />
-      <Edge From="49" To="50" Label="Source1" />
-      <Edge From="50" To="54" Label="Source1" />
-      <Edge From="51" To="52" Label="Source1" />
+      <Edge From="48" To="49" Label="Source1" />
+      <Edge From="50" To="51" Label="Source1" />
+      <Edge From="51" To="55" Label="Source1" />
       <Edge From="52" To="53" Label="Source1" />
-      <Edge From="53" To="54" Label="Source2" />
-      <Edge From="55" To="56" Label="Source1" />
-      <Edge From="57" To="58" Label="Source1" />
+      <Edge From="53" To="54" Label="Source1" />
+      <Edge From="54" To="55" Label="Source2" />
+      <Edge From="56" To="57" Label="Source1" />
       <Edge From="58" To="59" Label="Source1" />
+      <Edge From="59" To="66" Label="Source1" />
       <Edge From="60" To="61" Label="Source1" />
-      <Edge From="61" To="65" Label="Source1" />
+      <Edge From="61" To="66" Label="Source2" />
       <Edge From="62" To="63" Label="Source1" />
-      <Edge From="63" To="64" Label="Source1" />
-      <Edge From="64" To="65" Label="Source2" />
-      <Edge From="66" To="67" Label="Source1" />
-      <Edge From="68" To="69" Label="Source1" />
-      <Edge From="69" To="76" Label="Source1" />
-      <Edge From="70" To="71" Label="Source1" />
-      <Edge From="71" To="76" Label="Source2" />
-      <Edge From="72" To="73" Label="Source1" />
-      <Edge From="73" To="76" Label="Source3" />
-      <Edge From="74" To="75" Label="Source1" />
-      <Edge From="75" To="76" Label="Source4" />
+      <Edge From="63" To="66" Label="Source3" />
+      <Edge From="64" To="65" Label="Source1" />
+      <Edge From="65" To="66" Label="Source4" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
