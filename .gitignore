@@ -4,3 +4,4 @@ Data
 Packages
 *.exe
 *.exe.settings
+*.exe.WebView2
