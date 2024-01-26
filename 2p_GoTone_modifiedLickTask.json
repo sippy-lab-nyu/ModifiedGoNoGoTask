@@ -40,9 +40,17 @@
                 "upperBoundDuration": {
                     "type": "number",
                     "description": "in seconds (s)"
+                },
+                "lowerBoundPenaltyDuration": {
+                    "type": "number",
+                    "description": "in seconds (s)"
+                },
+                "upperBoundPenaltyDuration": {
+                    "type": "number",
+                    "description": "in seconds (s)"
                 }
             },
-            "required": ["lowerBoundDuration", "upperBoundDuration"]
+            "required": ["lowerBoundDuration", "upperBoundDuration", "lowerBoundPenaltyDuration", "upperBoundPenaltyDuration"]
         },
 
         "joystickParameters": {

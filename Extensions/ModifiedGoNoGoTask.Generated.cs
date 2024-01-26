@@ -255,6 +255,10 @@ namespace ModifiedGoNoGoTask
     
         private double _upperBoundDuration;
     
+        private double _lowerBoundPenaltyDuration;
+    
+        private double _upperBoundPenaltyDuration;
+    
         /// <summary>
         /// in seconds (s)
         /// </summary>
@@ -289,13 +293,49 @@ namespace ModifiedGoNoGoTask
             }
         }
     
+        /// <summary>
+        /// in seconds (s)
+        /// </summary>
+        [YamlDotNet.Serialization.YamlMemberAttribute(Alias="lowerBoundPenaltyDuration")]
+        [System.ComponentModel.DescriptionAttribute("in seconds (s)")]
+        public double LowerBoundPenaltyDuration
+        {
+            get
+            {
+                return _lowerBoundPenaltyDuration;
+            }
+            set
+            {
+                _lowerBoundPenaltyDuration = value;
+            }
+        }
+    
+        /// <summary>
+        /// in seconds (s)
+        /// </summary>
+        [YamlDotNet.Serialization.YamlMemberAttribute(Alias="upperBoundPenaltyDuration")]
+        [System.ComponentModel.DescriptionAttribute("in seconds (s)")]
+        public double UpperBoundPenaltyDuration
+        {
+            get
+            {
+                return _upperBoundPenaltyDuration;
+            }
+            set
+            {
+                _upperBoundPenaltyDuration = value;
+            }
+        }
+    
         public System.IObservable<ItiDuration> Process()
         {
             return System.Reactive.Linq.Observable.Defer(() => System.Reactive.Linq.Observable.Return(
                 new ItiDuration
                 {
                     LowerBoundDuration = _lowerBoundDuration,
-                    UpperBoundDuration = _upperBoundDuration
+                    UpperBoundDuration = _upperBoundDuration,
+                    LowerBoundPenaltyDuration = _lowerBoundPenaltyDuration,
+                    UpperBoundPenaltyDuration = _upperBoundPenaltyDuration
                 }));
         }
     }
