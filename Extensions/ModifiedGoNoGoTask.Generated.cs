@@ -158,6 +158,8 @@ namespace ModifiedGoNoGoTask
     
         private int _percentageGoTrials;
     
+        private int _percentageCatchTrials;
+    
         private bool _responseType;
     
         private string _soundcardCOMPort;
@@ -205,6 +207,19 @@ namespace ModifiedGoNoGoTask
             }
         }
     
+        [YamlDotNet.Serialization.YamlMemberAttribute(Alias="percentageCatchTrials")]
+        public int PercentageCatchTrials
+        {
+            get
+            {
+                return _percentageCatchTrials;
+            }
+            set
+            {
+                _percentageCatchTrials = value;
+            }
+        }
+    
         [YamlDotNet.Serialization.YamlMemberAttribute(Alias="responseType")]
         public bool ResponseType
         {
@@ -239,6 +254,7 @@ namespace ModifiedGoNoGoTask
                     BehaviorCOMPort = _behaviorCOMPort,
                     NumberOfTrials = _numberOfTrials,
                     PercentageGoTrials = _percentageGoTrials,
+                    PercentageCatchTrials = _percentageCatchTrials,
                     ResponseType = _responseType,
                     SoundcardCOMPort = _soundcardCOMPort
                 }));

@@ -5,6 +5,7 @@ public enum StateId
     NoGo,
     Response,
     Timeout,
+    CatchTrial,
 
     Annotation,
 
@@ -18,5 +19,7 @@ public enum StateId
     FalseAlarm,
     CorrectRejection,
     PullPenalty,
-    EarlyResponse
+    EarlyResponse,
+    CatchHit,
+    CatchMiss
 }

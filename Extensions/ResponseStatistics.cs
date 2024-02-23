@@ -20,7 +20,7 @@ public struct ResponseDescriptor
     public int TotalGoTrials;
 
     public int TotalNoGoTrials;
-
+    public int TotalCatchTrials;
 }
 
 [Combinator]
@@ -30,7 +30,6 @@ public class ResponseStatistics
 {
     void UpdateSlidingStatistics(ref ResponseDescriptor stats, ResponseId response)
     {
-        stats.Epoch++;
         switch (response)
         {
             case ResponseId.Hit: stats.Hits++; break;
@@ -42,7 +41,6 @@ public class ResponseStatistics
     }
     void UpdateTotalStatistics(ref ResponseDescriptor stats, ResponseId response)
     {
-        stats.Epoch++;
         switch (response)
         {
             case ResponseId.Hit: stats.TotalGoTrials++; stats.TotalHits++; break;
@@ -50,12 +48,15 @@ public class ResponseStatistics
             case ResponseId.PullPenalty: stats.TotalGoTrials++; break;
             case ResponseId.FalseAlarm: stats.TotalNoGoTrials++; break;
             case ResponseId.CorrectRejection: stats.TotalNoGoTrials++; break;
+            case ResponseId.CatchHit: stats.TotalCatchTrials++; break;
+            case ResponseId.CatchMiss: stats.TotalCatchTrials++; break;
         }
     }
     public IObservable<ResponseDescriptor> Process(IObservable<ResponseId> source)
     {
         return source.Scan(new ResponseDescriptor(), (stats, response) =>
         {
+            stats.Epoch++;
             UpdateSlidingStatistics(ref stats, response);
             return stats;
         });
@@ -70,6 +71,7 @@ public class ResponseStatistics
             stats.Misses = 0;
             stats.FalseAlarms = 0;
             stats.CorrectRejections = 0;
+            stats.Epoch++;
             UpdateTotalStatistics (ref stats, responses[responses.Count - 1]);
             foreach(var response in responses)
             {

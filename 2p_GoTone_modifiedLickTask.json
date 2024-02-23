@@ -20,6 +20,11 @@
                     "minimum": 0,
                     "maximum": 100
                 },
+                "percentageCatchTrials": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                },
                 "responseType": {
                     "type": "boolean"
                 },

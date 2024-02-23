@@ -27,7 +27,7 @@
     <WindowState>Normal</WindowState>
   </DialogSettings>
   <DialogSettings xsi:type="WorkflowEditorSettings">
-    <Visible>true</Visible>
+    <Visible>false</Visible>
     <Location>
       <X>156</X>
       <Y>156</Y>
@@ -138,7 +138,7 @@
         </Size>
         <WindowState>Normal</WindowState>
       </DialogSettings>
-      <DialogSettings>
+      <DialogSettings xsi:type="WorkflowEditorSettings">
         <Visible>false</Visible>
         <Location>
           <X>0</X>
@@ -149,6 +149,18 @@
           <Height>0</Height>
         </Size>
         <WindowState>Normal</WindowState>
+        <EditorDialogSettings>
+          <Visible>false</Visible>
+          <Location>
+            <X>3</X>
+            <Y>3</Y>
+          </Location>
+          <Size>
+            <Width>2146</Width>
+            <Height>1263</Height>
+          </Size>
+          <WindowState>Normal</WindowState>
+        </EditorDialogSettings>
       </DialogSettings>
       <DialogSettings>
         <Visible>false</Visible>
@@ -332,11 +344,11 @@
         <EditorDialogSettings>
           <Visible>false</Visible>
           <Location>
-            <X>431</X>
-            <Y>335</Y>
+            <X>241</X>
+            <Y>312</Y>
           </Location>
           <Size>
-            <Width>1304</Width>
+            <Width>2100</Width>
             <Height>880</Height>
           </Size>
           <WindowState>Normal</WindowState>
@@ -1200,7 +1212,7 @@
             <Y>3</Y>
           </Location>
           <Size>
-            <Width>1718</Width>
+            <Width>2146</Width>
             <Height>1263</Height>
           </Size>
           <WindowState>Normal</WindowState>
@@ -1391,8 +1403,8 @@
     <VisualizerSettings>
       <TimeSeriesVisualizer>
         <Capacity>640</Capacity>
-        <Min>0.006</Min>
-        <Max>0.013000000000000001</Max>
+        <Min>0.005</Min>
+        <Max>0.013</Max>
         <AutoScale>true</AutoScale>
       </TimeSeriesVisualizer>
     </VisualizerSettings>
@@ -2526,8 +2538,8 @@
   <DialogSettings>
     <Visible>true</Visible>
     <Location>
-      <X>783</X>
-      <Y>170</Y>
+      <X>831</X>
+      <Y>208</Y>
     </Location>
     <Size>
       <Width>950</Width>
@@ -2538,7 +2550,7 @@
     <VisualizerSettings>
       <TableLayoutPanelVisualizer>
         <MashupSettings>
-          <Source>68</Source>
+          <Source>58</Source>
           <VisualizerTypeName>StateVisualizer</VisualizerTypeName>
           <VisualizerSettings>
             <StateVisualizer>
@@ -2547,14 +2559,14 @@
           </VisualizerSettings>
         </MashupSettings>
         <MashupSettings>
-          <Source>70</Source>
+          <Source>60</Source>
           <VisualizerTypeName>ResponseVisualizer</VisualizerTypeName>
           <VisualizerSettings>
             <ResponseVisualizer />
           </VisualizerSettings>
         </MashupSettings>
         <MashupSettings>
-          <Source>72</Source>
+          <Source>62</Source>
           <VisualizerTypeName>Bonsai.Design.Visualizers.RollingGraphVisualizer</VisualizerTypeName>
           <VisualizerSettings>
             <RollingGraphVisualizer>
@@ -2566,7 +2578,7 @@
           </VisualizerSettings>
         </MashupSettings>
         <MashupSettings>
-          <Source>74</Source>
+          <Source>64</Source>
           <VisualizerTypeName>Bonsai.Vision.Design.IplImageVisualizer</VisualizerTypeName>
           <VisualizerSettings>
             <IplImageVisualizer />

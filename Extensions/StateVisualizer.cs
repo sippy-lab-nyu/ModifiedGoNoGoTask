@@ -70,6 +70,7 @@ public class StateVisualizer : DialogTypeVisualizer
         { StateId.NoGo, Color.Gold },
         { StateId.Response, Color.RoyalBlue },
         { StateId.Timeout, Color.Red },
+        { StateId.CatchTrial, Color.Purple },
         { StateId.Annotation, Color.Black },
         { StateId.Joystick, Color.White },
         { StateId.Lick, Color.HotPink },
@@ -80,6 +81,8 @@ public class StateVisualizer : DialogTypeVisualizer
         { StateId.FalseAlarm, Color.Transparent},
         { StateId.PullPenalty, Color.Transparent},
         { StateId.EarlyResponse, Color.Transparent},
+        { StateId.CatchHit, Color.Transparent},
+        { StateId.CatchMiss, Color.Transparent},
     };
 }
 
