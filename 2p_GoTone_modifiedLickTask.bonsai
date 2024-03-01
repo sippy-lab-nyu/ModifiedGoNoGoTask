@@ -264,8 +264,8 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="p2:CreateContinuousUniform">
-                      <p2:Lower>3</p2:Lower>
-                      <p2:Upper>5</p2:Upper>
+                      <p2:Lower>5</p2:Lower>
+                      <p2:Upper>7</p2:Upper>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -281,7 +281,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
-                      <rx:DueTime>PT3.761S</rx:DueTime>
+                      <rx:DueTime>PT6.404S</rx:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
@@ -344,7 +344,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Throttle">
-                            <rx:DueTime>PT2.719S</rx:DueTime>
+                            <rx:DueTime>PT3.482S</rx:DueTime>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="Combinator">
@@ -738,7 +738,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="FloatProperty">
-                      <Value>2</Value>
+                      <Value>1</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="scr:ExpressionTransform">
@@ -804,7 +804,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Timer">
-                            <rx:DueTime>PT2S</rx:DueTime>
+                            <rx:DueTime>PT1S</rx:DueTime>
                             <rx:Period>PT0S</rx:Period>
                           </Combinator>
                         </Expression>
@@ -943,7 +943,7 @@
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
-                    <Id>CatchHit</Id>
+                    <Id>Hit</Id>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
                     <Name>Miss</Name>
@@ -971,7 +971,7 @@
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
-                    <Id>CatchMiss</Id>
+                    <Id>Miss</Id>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
                     <Name>NoGoTrial</Name>
@@ -1266,7 +1266,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="FloatProperty">
-                            <Value>12</Value>
+                            <Value>10</Value>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="scr:ExpressionTransform">
@@ -1289,7 +1289,7 @@
                               </Expression>
                               <Expression xsi:type="Combinator">
                                 <Combinator xsi:type="rx:Delay">
-                                  <rx:DueTime>PT12S</rx:DueTime>
+                                  <rx:DueTime>PT10S</rx:DueTime>
                                 </Combinator>
                               </Expression>
                               <Expression xsi:type="WorkflowOutput" />
@@ -1375,8 +1375,10 @@
                         <Expression xsi:type="rx:PublishSubject">
                           <Name>LaserOn</Name>
                         </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
-                          <Id>Go</Id>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
+                            <Id>Go</Id>
+                          </Builder>
                         </Expression>
                         <Expression xsi:type="ExternalizedMapping">
                           <Property Name="SoundIndex" DisplayName="CatchTrialSound" />
@@ -1535,7 +1537,7 @@
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
-                    <Id>Hit</Id>
+                    <Id>CatchHit</Id>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
                     <Name>Miss</Name>
@@ -1563,7 +1565,7 @@
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogState.bonsai">
-                    <Id>Miss</Id>
+                    <Id>CatchMiss</Id>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Merge" />
@@ -1589,7 +1591,7 @@
                   </Expression>
                   <Expression xsi:type="LessThan">
                     <Operand xsi:type="DoubleProperty">
-                      <Value>70</Value>
+                      <Value>20</Value>
                     </Operand>
                   </Expression>
                   <Expression xsi:type="rx:AsyncSubject">
@@ -1808,7 +1810,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20/ResponseStat.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51/ResponseStat.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1849,9 +1851,9 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:StateTransition">
-                <p1:Trial>10</p1:Trial>
+                <p1:Trial>7</p1:Trial>
                 <p1:Id>ITI</p1:Id>
-                <p1:ElapsedTime>15719452.889024</p1:ElapsedTime>
+                <p1:ElapsedTime>16322912.028032</p1:ElapsedTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -1880,7 +1882,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20/GoTone_StateTransitions.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51/GoTone_StateTransitions.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1942,7 +1944,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20/sounds.csv</io:FileName>
+              <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51/sounds.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -2128,7 +2130,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20/Joystick.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51/Joystick.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -2254,7 +2256,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20/soundcard.bin</dsp:Path>
+                      <dsp:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51/soundcard.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -2544,7 +2546,7 @@
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20/JoystickTrace.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51/JoystickTrace.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2616,8 +2618,8 @@
       <Expression xsi:type="IncludeWorkflow" Path="Extensions\SessionMetadata.bonsai">
         <DataPath>C:\Users\SippylabJan\Desktop\BehaviorData</DataPath>
         <ExperimenterId>Shriya</ExperimenterId>
-        <SubjectId>SP042</SubjectId>
-        <ExperimentName>AudLickTask_Day6</ExperimentName>
+        <SubjectId>SP067</SubjectId>
+        <ExperimentName>AudLickTask_Day08</ExperimentName>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>Timestamp</Name>
@@ -2642,7 +2644,7 @@
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20/LickTrace.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51/LickTrace.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2691,7 +2693,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20\SP042_AudLickTask_Day6_2024-02-23T09-58-20.avi</cv:FileName>
+          <cv:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51\SP067_AudLickTask_Day08_2024-03-01T09-35-51.avi</cv:FileName>
           <cv:Suffix>None</cv:Suffix>
           <cv:Buffered>true</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -2721,7 +2723,7 @@
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20/VideoTimestamps.csv</io:FileName>
+        <io:FileName>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51/VideoTimestamps.csv</io:FileName>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>None</io:Suffix>
@@ -2765,7 +2767,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="p1:WriteAllText">
-          <p1:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day6/SP042_AudLickTask_Day6_2024-02-23T09-58-20/TaskParameters.yml</p1:Path>
+          <p1:Path>C:\Users\SippylabJan\Desktop\BehaviorData/Shriya/AudLickTask_Day08/SP067_AudLickTask_Day08_2024-03-01T09-35-51/TaskParameters.yml</p1:Path>
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -2787,25 +2789,48 @@
             <Expression xsi:type="SubscribeSubject">
               <Name>ResponseStatistics</Name>
             </Expression>
-            <Expression xsi:type="ExternalizedMapping">
-              <Property Name="Count" />
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:BufferCount">
-                <rx:Count>20</rx:Count>
-                <rx:Skip>1</rx:Skip>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>20</rx:Count>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:IncrementalBuffer" />
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Merge" />
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="GroupWorkflow">
+                <Name>SlidingBuffer</Name>
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="WorkflowInput">
+                      <Name>Source1</Name>
+                    </Expression>
+                    <Expression xsi:type="ExternalizedMapping">
+                      <Property Name="Count" />
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:BufferCount">
+                        <rx:Count>20</rx:Count>
+                        <rx:Skip>1</rx:Skip>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Take">
+                        <rx:Count>20</rx:Count>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="p1:IncrementalBuffer" />
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Merge" />
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="2" Label="Source1" />
+                    <Edge From="0" To="3" Label="Source1" />
+                    <Edge From="1" To="2" Label="Source2" />
+                    <Edge From="1" To="3" Label="Source2" />
+                    <Edge From="2" To="5" Label="Source1" />
+                    <Edge From="3" To="4" Label="Source1" />
+                    <Edge From="4" To="5" Label="Source2" />
+                    <Edge From="5" To="6" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Builder>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p1:ResponseStatistics" />
@@ -2813,15 +2838,9 @@
             <Expression xsi:type="WorkflowOutput" />
           </Nodes>
           <Edges>
-            <Edge From="0" To="2" Label="Source1" />
-            <Edge From="0" To="3" Label="Source1" />
-            <Edge From="1" To="2" Label="Source2" />
-            <Edge From="1" To="3" Label="Source2" />
-            <Edge From="2" To="5" Label="Source1" />
-            <Edge From="3" To="4" Label="Source1" />
-            <Edge From="4" To="5" Label="Source2" />
-            <Edge From="5" To="6" Label="Source1" />
-            <Edge From="6" To="7" Label="Source1" />
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
