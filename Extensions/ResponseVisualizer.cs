@@ -13,7 +13,7 @@ using ZedGraph;
 
 public class ResponseVisualizer : DialogTypeVisualizer
 {
-    const string TitleLabel = "Total Go Trials: {0} Total No-Go Trials {1} Total Catch Trials {2} \nTotal Rewards: {3}";
+    const string TitleLabel = "Total Go Trials: {0} Total No-Go Trials {1} Catch Trials ({2} / {3}) \nTotal Rewards: {4}";
     static readonly string[] ResponseLabels = Enum.GetNames(typeof(ResponseId)).Skip(1).ToArray();
     static readonly ResponseId[] ResponseValues = ((ResponseId[])Enum.GetValues(typeof(ResponseId))).Skip(1).ToArray();
     GraphControl graph;
@@ -64,7 +64,7 @@ public class ResponseVisualizer : DialogTypeVisualizer
         }
 
         graph.GraphPane.Title.IsVisible = true;
-        graph.GraphPane.Title.Text = string.Format(TitleLabel, 0, 0, 0, 0);
+        graph.GraphPane.Title.Text = string.Format(TitleLabel, 0, 0, 0, 0, 0);
         var visualizerService = (IDialogTypeVisualizerService)provider.GetService(typeof(IDialogTypeVisualizerService));
         if (visualizerService != null)
         {
@@ -83,6 +83,7 @@ public class ResponseVisualizer : DialogTypeVisualizer
         graph.GraphPane.Title.Text = string.Format(TitleLabel, 
             descriptor.TotalGoTrials,
             descriptor.TotalNoGoTrials,
+            descriptor.CatchHits,
             descriptor.TotalCatchTrials,
             descriptor.TotalHits);
         graph.Invalidate();

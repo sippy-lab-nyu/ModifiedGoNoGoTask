@@ -12,6 +12,7 @@ public struct ResponseDescriptor
     public int Misses;
     public int FalseAlarms;
     public int CorrectRejections;
+    public int CatchHits;
     public int PullPenalty;
     public int EarlyResponse;
 
@@ -37,6 +38,7 @@ public class ResponseStatistics
             case ResponseId.PullPenalty: stats.Misses++; break;
             case ResponseId.FalseAlarm: stats.FalseAlarms++; break;
             case ResponseId.CorrectRejection: stats.CorrectRejections++; break;
+            case ResponseId.CatchHit: stats.CatchHits++; break;
         }
     }
     void UpdateTotalStatistics(ref ResponseDescriptor stats, ResponseId response)
@@ -57,6 +59,7 @@ public class ResponseStatistics
         return source.Scan(new ResponseDescriptor(), (stats, response) =>
         {
             stats.Epoch++;
+            UpdateTotalStatistics (ref stats, response);
             UpdateSlidingStatistics(ref stats, response);
             return stats;
         });
@@ -67,10 +70,11 @@ public class ResponseStatistics
     {
         return source.Scan(new ResponseDescriptor(), (stats, responses) =>
         {
-            stats.Hits = 0; 
+            stats.Hits = 0;
             stats.Misses = 0;
             stats.FalseAlarms = 0;
             stats.CorrectRejections = 0;
+            stats.CatchHits = 0;
             stats.Epoch++;
             UpdateTotalStatistics (ref stats, responses[responses.Count - 1]);
             foreach(var response in responses)
